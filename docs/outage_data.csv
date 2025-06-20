@@ -1,0 +1,301 @@
+﻿outage_id,start_timestamp,end_timestamp,district,affected_substation,feeder_affected,capacity_affected_mw,customers_affected,outage_type,cause,season
+OUT-2020-024,5/14/2020 9:30,5/14/2020 17:50,Kadapa,AP-SS-024,FDR-KDP-019,26.5,6900,Planned,Upgradation,Summer
+OUT-2020-025,5/19/2020 15:20,5/19/2020 20:45,East Godavari,AP-SS-027,FDR-EG-007,43.6,11600,Unplanned,Transmission Line Fault,Summer
+OUT-2020-026,5/24/2020 10:10,5/24/2020 16:35,Visakhapatnam,AP-SS-015,FDR-VSP-049,31.8,8400,Unplanned,Equipment Failure,Summer
+OUT-2020-027,5/29/2020 7:45,5/29/2020 13:20,Kurnool,AP-SS-034,FDR-KNL-063,29.4,7700,Planned,Maintenance,Summer
+OUT-2020-028,6/3/2020 12:15,6/3/2020 15:40,Krishna,AP-SS-021,FDR-KRI-009,34.7,9200,Unplanned,Equipment Failure,Summer
+OUT-2020-029,6/8/2020 9:30,6/8/2020 14:45,Anantapur,AP-SS-033,FDR-ATP-027,23.6,6000,Unplanned,Overload,Summer
+OUT-2020-030,6/13/2020 15:10,6/13/2020 18:25,Chittoor,AP-SS-022,FDR-CTR-044,27.9,7300,Unplanned,Transmission Line Fault,Summer
+OUT-2020-031,6/18/2020 10:20,6/18/2020 17:35,Visakhapatnam,AP-SS-020,FDR-VSP-081,36.4,9600,Planned,Maintenance,Summer
+OUT-2020-032,6/23/2020 13:45,6/23/2020 19:20,Guntur,AP-SS-005,FDR-GNT-037,28.7,7500,Unplanned,Equipment Failure,Summer
+OUT-2020-033,6/28/2020 8:15,6/28/2020 13:30,Nellore,AP-SS-035,FDR-NLR-012,24.8,6400,Unplanned,Overload,Summer
+OUT-2020-034,7/3/2020 11:30,7/3/2020 19:15,Krishna,AP-SS-007,FDR-KRI-026,31.2,8200,Unplanned,Weather Related,Monsoon
+OUT-2020-035,7/7/2020 9:45,7/8/2020 4:30,East Godavari,AP-SS-036,FDR-EG-041,37.9,10000,Unplanned,Weather Related,Monsoon
+OUT-2020-036,7/12/2020 14:20,7/12/2020 22:45,Visakhapatnam,AP-SS-023,FDR-VSP-106,45.3,12100,Unplanned,Weather Related,Monsoon
+OUT-2020-037,7/16/2020 12:10,7/16/2020 17:35,Kadapa,AP-SS-024,FDR-KDP-029,32.5,8600,Unplanned,Equipment Failure,Monsoon
+OUT-2020-038,7/21/2020 10:45,7/21/2020 16:20,Krishna,AP-SS-021,FDR-KRI-053,41.7,11100,Unplanned,Transmission Line Fault,Monsoon
+OUT-2020-039,7/25/2020 8:30,7/25/2020 16:15,Guntur,AP-SS-032,FDR-GNT-075,38.2,10100,Planned,Maintenance,Monsoon
+OUT-2020-040,7/30/2020 15:40,7/31/2020 1:15,Visakhapatnam,AP-SS-037,FDR-VSP-033,46.8,12500,Unplanned,Weather Related,Monsoon
+OUT-2020-041,8/4/2020 11:20,8/4/2020 16:50,Kurnool,AP-SS-025,FDR-KNL-047,34.6,9100,Unplanned,Equipment Failure,Monsoon
+OUT-2020-042,8/8/2020 13:45,8/8/2020 19:20,Anantapur,AP-SS-017,FDR-ATP-062,29.8,7800,Unplanned,Overload,Monsoon
+OUT-2020-043,8/13/2020 9:10,8/13/2020 22:35,Krishna,AP-SS-007,FDR-KRI-019,35.4,9400,Unplanned,Weather Related,Monsoon
+OUT-2020-044,8/17/2020 7:45,8/17/2020 16:30,West Godavari,AP-SS-028,FDR-WG-054,40.6,10800,Planned,Upgradation,Monsoon
+OUT-2020-045,8/22/2020 14:30,8/23/2020 0:15,Visakhapatnam,AP-SS-020,FDR-VSP-071,48.5,13000,Unplanned,Weather Related,Monsoon
+OUT-2020-046,8/26/2020 16:45,8/26/2020 22:20,Nellore,AP-SS-008,FDR-NLR-025,32.4,8600,Unplanned,Transmission Line Fault,Monsoon
+OUT-2020-047,8/31/2020 5:30,8/31/2020 16:45,Visakhapatnam,AP-SS-020,FDR-VSP-017,53.8,14500,Unplanned,Weather Related,Monsoon
+OUT-2020-048,9/4/2020 8:15,9/5/2020 2:30,East Godavari,AP-SS-036,FDR-EG-008,47.2,12700,Unplanned,Weather Related,Monsoon
+OUT-2020-049,9/9/2020 11:40,9/9/2020 18:15,Krishna,AP-SS-021,FDR-KRI-061,41.3,11000,Unplanned,Equipment Failure,Monsoon
+OUT-2020-050,9/13/2020 13:20,9/13/2020 19:40,Srikakulam,AP-SS-029,FDR-SKM-042,36.8,9800,Unplanned,Weather Related,Monsoon
+OUT-2020-051,10/6/2020 15:05,10/6/2020 19:40,Vizianagaram,AP-SS-030,FDR-VZM-015,33.2,8800,Unplanned,Transmission Line Fault,Monsoon
+OUT-2020-052,10/11/2020 9:25,10/11/2020 15:50,Visakhapatnam,AP-SS-015,FDR-VSP-064,42.7,11400,Unplanned,Weather Related,Monsoon
+OUT-2020-053,10/15/2020 14:40,10/15/2020 20:15,West Godavari,AP-SS-011,FDR-WG-022,38.9,10400,Unplanned,Equipment Failure,Monsoon
+OUT-2020-054,10/19/2020 7:55,10/19/2020 14:25,Krishna,AP-SS-007,FDR-KRI-048,36.3,9600,Planned,Maintenance,Monsoon
+OUT-2020-055,10/24/2020 11:20,10/24/2020 17:45,Visakhapatnam,AP-SS-020,FDR-VSP-039,45.8,12300,Unplanned,Equipment Failure,Monsoon
+OUT-2020-056,10/28/2020 16:35,10/28/2020 21:10,Guntur,AP-SS-005,FDR-GNT-091,29.6,7800,Unplanned,Overload,Monsoon
+OUT-2020-057,11/2/2020 10:05,11/2/2020 13:40,East Godavari,AP-SS-027,FDR-EG-056,31.7,8400,Unplanned,Equipment Failure,Winter
+OUT-2020-058,11/6/2020 8:15,11/6/2020 15:30,Visakhapatnam,AP-SS-023,FDR-VSP-027,39.5,10500,Planned,Upgradation,Winter
+OUT-2020-059,11/11/2020 13:25,11/11/2020 16:50,Kadapa,AP-SS-024,FDR-KDP-039,28.2,7400,Unplanned,Transmission Line Fault,Winter
+OUT-2020-060,11/15/2020 9:40,11/15/2020 12:20,Krishna,AP-SS-021,FDR-KRI-074,34.8,9200,Unplanned,Equipment Failure,Winter
+OUT-2020-061,11/20/2020 15:10,11/20/2020 18:35,Anantapur,AP-SS-033,FDR-ATP-018,22.9,5900,Planned,Maintenance,Winter
+OUT-2020-062,11/24/2020 11:45,11/24/2020 15:20,Visakhapatnam,AP-SS-037,FDR-VSP-052,41.7,11100,Unplanned,Equipment Failure,Winter
+OUT-2020-063,11/28/2020 7:30,11/28/2020 10:55,Nellore,AP-SS-008,FDR-NLR-067,27.6,7200,Unplanned,Overload,Winter
+OUT-2020-064,12/3/2020 9:15,12/3/2020 16:40,Guntur,AP-SS-032,FDR-GNT-034,36.5,9700,Planned,Maintenance,Winter
+OUT-2020-065,12/7/2020 14:25,12/7/2020 17:50,Krishna,AP-SS-007,FDR-KRI-028,31.9,8300,Unplanned,Equipment Failure,Winter
+OUT-2020-066,12/11/2020 10:40,12/11/2020 14:15,Visakhapatnam,AP-SS-020,FDR-VSP-087,44.1,11800,Unplanned,Transmission Line Fault,Winter
+OUT-2020-067,12/16/2020 8:55,12/16/2020 12:30,Kurnool,AP-SS-025,FDR-KNL-059,29.3,7700,Unplanned,Equipment Failure,Winter
+OUT-2020-068,12/20/2020 12:10,12/20/2020 15:45,Chittoor,AP-SS-003,FDR-CTR-026,25.4,6600,Planned,Maintenance,Winter
+OUT-2020-069,12/24/2020 16:35,12/24/2020 19:50,East Godavari,AP-SS-036,FDR-EG-031,37.8,10000,Unplanned,Equipment Failure,Winter
+OUT-2020-070,12/29/2020 9:25,12/29/2020 13:40,Visakhapatnam,AP-SS-023,FDR-VSP-045,42.6,11400,Unplanned,Overload,Winter
+OUT-2020-071,1/8/2020 11:15,1/8/2020 14:30,Srikakulam,AP-SS-029,FDR-SKM-021,24.8,6400,Unplanned,Equipment Failure,Winter
+OUT-2020-072,2/2/2020 13:40,2/2/2020 17:15,Prakasam,AP-SS-009,FDR-PKM-036,27.5,7200,Planned,Maintenance,Winter
+OUT-2020-073,3/1/2020 10:05,3/1/2020 16:40,West Godavari,AP-SS-028,FDR-WG-017,35.4,9300,Unplanned,Transmission Line Fault,Summer
+OUT-2020-074,4/5/2020 15:20,4/5/2020 19:50,East Godavari,AP-SS-036,FDR-EG-052,39.7,10500,Unplanned,Equipment Failure,Summer
+OUT-2020-075,5/10/2020 8:35,5/10/2020 17:15,Krishna,AP-SS-021,FDR-KRI-063,47.2,12600,Planned,Upgradation,Summer
+OUT-2020-076,6/15/2020 12:50,6/15/2020 18:25,Visakhapatnam,AP-SS-037,FDR-VSP-079,43.8,11700,Unplanned,Overload,Summer
+OUT-2020-077,7/20/2020 9:40,7/20/2020 21:15,Guntur,AP-SS-005,FDR-GNT-042,40.9,10900,Unplanned,Weather Related,Monsoon
+OUT-2020-078,8/25/2020 14:15,8/25/2020 22:40,Nellore,AP-SS-035,FDR-NLR-028,36.3,9600,Unplanned,Weather Related,Monsoon
+OUT-2020-079,9/30/2020 11:05,9/30/2020 17:30,Kadapa,AP-SS-039,FDR-KDP-013,28.7,7500,Planned,Maintenance,Monsoon
+OUT-2020-080,10/15/2020 7:25,10/15/2020 15:50,Krishna,AP-SS-007,FDR-KRI-035,34.6,9100,Unplanned,Equipment Failure,Monsoon
+OUT-2020-081,11/20/2020 13:40,11/20/2020 17:15,Anantapur,AP-SS-017,FDR-ATP-024,26.4,6800,Unplanned,Transmission Line Fault,Winter
+OUT-2020-082,12/25/2020 10:05,12/25/2020 13:40,Visakhapatnam,AP-SS-020,FDR-VSP-066,45.3,12100,Unplanned,Equipment Failure,Winter
+OUT-2020-083,1/14/2020 12:35,1/14/2020 16:10,Chittoor,AP-SS-022,FDR-CTR-037,29.8,7800,Unplanned,Equipment Failure,Winter
+OUT-2020-084,2/22/2020 8:50,2/22/2020 15:25,East Godavari,AP-SS-027,FDR-EG-044,38.2,10100,Planned,Maintenance,Winter
+OUT-2020-085,3/19/2020 14:15,3/19/2020 19:40,Visakhapatnam,AP-SS-023,FDR-VSP-058,42.9,11500,Unplanned,Overload,Summer
+OUT-2020-086,4/16/2020 11:30,4/16/2020 16:55,Kurnool,AP-SS-034,FDR-KNL-021,31.6,8300,Unplanned,Equipment Failure,Summer
+OUT-2020-087,5/23/2020 7:45,5/23/2020 14:20,Krishna,AP-SS-007,FDR-KRI-049,37.4,9900,Planned,Upgradation,Summer
+OUT-2020-088,6/27/2020 9:20,6/27/2020 13:55,Guntur,AP-SS-032,FDR-GNT-075,35.2,9300,Unplanned,Equipment Failure,Summer
+OUT-2020-089,7/15/2020 15:40,7/16/2020 3:15,East Godavari,AP-SS-036,FDR-EG-019,46.7,12500,Unplanned,Weather Related,Monsoon
+OUT-2020-090,8/18/2020 10:05,8/18/2020 19:40,Visakhapatnam,AP-SS-020,FDR-VSP-034,51.4,13800,Unplanned,Weather Related,Monsoon
+OUT-2020-091,9/24/2020 8:35,9/24/2020 14:10,Nellore,AP-SS-008,FDR-NLR-053,32.8,8700,Unplanned,Equipment Failure,Monsoon
+OUT-2020-092,10/21/2020 13:50,10/21/2020 20:25,Krishna,AP-SS-021,FDR-KRI-027,41.3,11000,Unplanned,Weather Related,Monsoon
+OUT-2020-093,11/17/2020 9:15,11/17/2020 16:40,West Godavari,AP-SS-011,FDR-WG-038,36.9,9800,Planned,Maintenance,Winter
+OUT-2020-094,12/14/2020 15:30,12/14/2020 18:55,Kadapa,AP-SS-024,FDR-KDP-047,27.3,7100,Unplanned,Equipment Failure,Winter
+OUT-2020-095,1/27/2020 9:45,1/27/2020 13:20,Visakhapatnam,AP-SS-037,FDR-VSP-082,38.7,10300,Unplanned,Transmission Line Fault,Winter
+OUT-2020-096,3/31/2020 11:10,3/31/2020 17:45,Anantapur,AP-SS-033,FDR-ATP-014,30.5,8000,Unplanned,Equipment Failure,Summer
+OUT-2020-097,5/30/2020 14:25,5/30/2020 19:50,Guntur,AP-SS-005,FDR-GNT-061,39.3,10400,Unplanned,Overload,Summer
+OUT-2020-098,7/26/2020 8:20,7/26/2020 17:45,Krishna,AP-SS-007,FDR-KRI-039,43.4,11600,Unplanned,Weather Related,Monsoon
+OUT-2020-099,9/12/2020 12:40,9/12/2020 19:15,East Godavari,AP-SS-027,FDR-EG-026,40.8,10900,Unplanned,Equipment Failure,Monsoon
+OUT-2020-100,12/5/2020 10:30,12/5/2020 14:05,Visakhapatnam,AP-SS-020,FDR-VSP-047,44.6,11900,Planned,Maintenance,Winter
+OUT-2021-001,1/7/2021 8:15,1/7/2021 14:40,Visakhapatnam,AP-SS-020,FDR-VSP-053,43.7,11700,Planned,Maintenance,Winter
+OUT-2021-002,1/12/2021 13:30,1/12/2021 16:55,Krishna,AP-SS-007,FDR-KRI-042,35.4,9300,Unplanned,Equipment Failure,Winter
+OUT-2021-003,1/18/2021 10:45,1/18/2021 14:20,Guntur,AP-SS-005,FDR-GNT-079,29.8,7800,Unplanned,Transmission Line Fault,Winter
+OUT-2021-004,1/23/2021 9:20,1/23/2021 13:50,East Godavari,AP-SS-036,FDR-EG-037,33.6,8900,Planned,Upgradation,Winter
+OUT-2021-005,1/29/2021 14:05,1/29/2021 17:40,Nellore,AP-SS-008,FDR-NLR-024,27.9,7300,Unplanned,Equipment Failure,Winter
+OUT-2021-006,2/4/2021 11:30,2/4/2021 15:15,Visakhapatnam,AP-SS-023,FDR-VSP-068,46.2,12400,Unplanned,Overload,Winter
+OUT-2021-007,2/9/2021 7:50,2/9/2021 13:25,Kurnool,AP-SS-025,FDR-KNL-031,32.1,8400,Planned,Maintenance,Winter
+OUT-2021-008,2/15/2021 16:15,2/15/2021 19:50,Chittoor,AP-SS-003,FDR-CTR-013,24.3,6300,Unplanned,Equipment Failure,Winter
+OUT-2021-009,2/20/2021 9:40,2/20/2021 14:15,Krishna,AP-SS-021,FDR-KRI-057,38.5,10200,Unplanned,Transmission Line Fault,Winter
+OUT-2021-010,2/26/2021 12:30,2/26/2021 16:05,Anantapur,AP-SS-033,FDR-ATP-022,26.7,6900,Planned,Upgradation,Winter
+OUT-2021-011,3/4/2021 15:20,3/4/2021 20:45,Visakhapatnam,AP-SS-020,FDR-VSP-041,47.8,12800,Unplanned,Equipment Failure,Summer
+OUT-2021-012,3/10/2021 8:45,3/10/2021 14:20,Guntur,AP-SS-032,FDR-GNT-065,34.9,9300,Unplanned,Overload,Summer
+OUT-2021-013,3/15/2021 11:10,3/15/2021 17:45,East Godavari,AP-SS-027,FDR-EG-048,40.3,10800,Planned,Maintenance,Summer
+OUT-2021-014,3/21/2021 13:25,3/21/2021 18:50,Krishna,AP-SS-007,FDR-KRI-031,36.7,9700,Unplanned,Equipment Failure,Summer
+OUT-2021-015,3/26/2021 10:05,3/26/2021 15:30,West Godavari,AP-SS-028,FDR-WG-027,39.2,10400,Unplanned,Transmission Line Fault,Summer
+OUT-2021-016,4/1/2021 7:40,4/1/2021 15:15,Visakhapatnam,AP-SS-037,FDR-VSP-074,42.5,11400,Planned,Upgradation,Summer
+OUT-2021-017,4/7/2021 14:30,4/7/2021 19:55,Kadapa,AP-SS-024,FDR-KDP-036,30.8,8100,Unplanned,Equipment Failure,Summer
+OUT-2021-018,4/12/2021 9:15,4/12/2021 14:40,Nellore,AP-SS-035,FDR-NLR-019,28.3,7400,Unplanned,Overload,Summer
+OUT-2021-019,4/18/2021 12:50,4/18/2021 16:25,Krishna,AP-SS-021,FDR-KRI-062,41.4,11000,Unplanned,Equipment Failure,Summer
+OUT-2021-020,4/23/2021 16:05,4/23/2021 21:30,Visakhapatnam,AP-SS-020,FDR-VSP-088,48.6,13000,Planned,Maintenance,Summer
+OUT-2021-021,4/29/2021 10:20,4/29/2021 15:45,Guntur,AP-SS-005,FDR-GNT-051,37.9,10100,Unplanned,Transmission Line Fault,Summer
+OUT-2021-022,5/5/2021 8:35,5/5/2021 13:10,East Godavari,AP-SS-036,FDR-EG-015,35.6,9400,Unplanned,Equipment Failure,Summer
+OUT-2021-023,5/10/2021 13:15,5/10/2021 18:40,Kurnool,AP-SS-034,FDR-KNL-043,31.2,8200,Unplanned,Overload,Summer
+OUT-2021-024,5/16/2021 11:40,5/16/2021 17:15,Visakhapatnam,AP-SS-023,FDR-VSP-029,45.7,12200,Planned,Upgradation,Summer
+OUT-2021-025,5/21/2021 15:25,5/21/2021 19:00,Krishna,AP-SS-007,FDR-KRI-046,38.9,10300,Unplanned,Equipment Failure,Summer
+OUT-2021-026,5/27/2021 9:50,5/27/2021 15:25,Anantapur,AP-SS-017,FDR-ATP-058,27.4,7100,Unplanned,Transmission Line Fault,Summer
+OUT-2021-027,6/2/2021 12:15,6/2/2021 17:40,West Godavari,AP-SS-011,FDR-WG-034,39.5,10500,Unplanned,Equipment Failure,Summer
+OUT-2021-028,6/8/2021 8:30,6/8/2021 16:05,Visakhapatnam,AP-SS-020,FDR-VSP-063,49.1,13200,Planned,Maintenance,Summer
+OUT-2021-029,6/13/2021 14:45,6/13/2021 20:20,Chittoor,AP-SS-022,FDR-CTR-027,26.8,7000,Unplanned,Overload,Summer
+OUT-2021-030,6/19/2021 10:10,6/19/2021 14:45,Guntur,AP-SS-032,FDR-GNT-046,36.3,9600,Unplanned,Equipment Failure,Summer
+OUT-2021-031,6/24/2021 13:35,6/24/2021 19:10,Krishna,AP-SS-021,FDR-KRI-025,42.7,11400,Unplanned,Transmission Line Fault,Summer
+OUT-2021-032,6/30/2021 7:25,6/30/2021 13:00,East Godavari,AP-SS-027,FDR-EG-073,38.2,10100,Unplanned,Equipment Failure,Summer
+OUT-2021-033,7/5/2021 11:40,7/5/2021 22:15,Visakhapatnam,AP-SS-023,FDR-VSP-056,47.3,12600,Unplanned,Weather Related,Monsoon
+OUT-2021-034,7/11/2021 9:05,7/11/2021 19:40,Srikakulam,AP-SS-029,FDR-SKM-032,34.5,9100,Unplanned,Weather Related,Monsoon
+OUT-2021-035,7/16/2021 15:20,7/16/2021 21:55,Krishna,AP-SS-007,FDR-KRI-069,40.6,10800,Unplanned,Equipment Failure,Monsoon
+OUT-2021-036,7/22/2021 8:45,7/22/2021 16:20,Nellore,AP-SS-008,FDR-NLR-051,32.9,8700,Planned,Maintenance,Monsoon
+OUT-2021-037,7/27/2021 13:10,7/28/2021 1:45,Visakhapatnam,AP-SS-020,FDR-VSP-035,50.4,13500,Unplanned,Weather Related,Monsoon
+OUT-2021-038,8/2/2021 10:30,8/2/2021 16:05,Guntur,AP-SS-005,FDR-GNT-072,37.1,9900,Unplanned,Equipment Failure,Monsoon
+OUT-2021-039,8/8/2021 7:50,8/8/2021 18:25,East Godavari,AP-SS-036,FDR-EG-028,42.8,11400,Unplanned,Weather Related,Monsoon
+OUT-2021-040,8/13/2021 12:15,8/13/2021 17:50,West Godavari,AP-SS-011,FDR-WG-041,36.4,9600,Unplanned,Transmission Line Fault,Monsoon
+OUT-2021-041,8/19/2021 15:40,8/19/2021 22:15,Visakhapatnam,AP-SS-037,FDR-VSP-048,43.9,11700,Unplanned,Weather Related,Monsoon
+OUT-2021-042,8/24/2021 9:25,8/24/2021 16:00,Krishna,AP-SS-021,FDR-KRI-034,44.2,11800,Planned,Upgradation,Monsoon
+OUT-2021-043,8/30/2021 11:50,8/30/2021 17:25,Kadapa,AP-SS-039,FDR-KDP-017,29.6,7700,Unplanned,Equipment Failure,Monsoon
+OUT-2021-044,9/4/2021 14:15,9/5/2021 2:50,Visakhapatnam,AP-SS-020,FDR-VSP-077,52.3,14100,Unplanned,Weather Related,Monsoon
+OUT-2021-045,9/10/2021 8:40,9/10/2021 14:15,Anantapur,AP-SS-033,FDR-ATP-016,28.1,7300,Unplanned,Overload,Monsoon
+OUT-2021-046,9/15/2021 10:30,9/15/2021 17:05,Guntur,AP-SS-032,FDR-GNT-084,38.7,10300,Planned,Maintenance,Monsoon
+OUT-2021-047,9/21/2021 13:55,9/21/2021 20:30,Krishna,AP-SS-007,FDR-KRI-058,39.8,10600,Unplanned,Equipment Failure,Monsoon
+OUT-2021-048,9/26/2021 16:20,9/26/2021 23:55,East Godavari,AP-SS-027,FDR-EG-023,41.5,11100,Unplanned,Weather Related,Monsoon
+OUT-2021-049,10/2/2021 9:45,10/2/2021 15:20,Visakhapatnam,AP-SS-023,FDR-VSP-091,46.9,12500,Unplanned,Equipment Failure,Monsoon
+OUT-2021-050,10/7/2021 12:10,10/7/2021 19:45,Nellore,AP-SS-035,FDR-NLR-038,33.7,8900,Unplanned,Weather Related,Monsoon
+OUT-2021-051,10/13/2021 15:35,10/13/2021 21:10,Kurnool,AP-SS-025,FDR-KNL-065,35.2,9300,Unplanned,Transmission Line Fault,Monsoon
+OUT-2021-052,10/18/2021 8:20,10/18/2021 15:55,Visakhapatnam,AP-SS-020,FDR-VSP-044,48.5,13000,Planned,Upgradation,Monsoon
+OUT-2021-053,10/24/2021 11:45,10/24/2021 19:20,Krishna,AP-SS-021,FDR-KRI-071,42.3,11300,Unplanned,Weather Related,Monsoon
+OUT-2021-054,10/29/2021 14:10,10/29/2021 18:45,West Godavari,AP-SS-028,FDR-WG-029,37.6,10000,Unplanned,Equipment Failure,Monsoon
+OUT-2021-055,11/4/2021 10:35,11/4/2021 14:10,Visakhapatnam,AP-SS-037,FDR-VSP-083,44.8,12000,Unplanned,Equipment Failure,Winter
+OUT-2021-056,11/9/2021 7:50,11/9/2021 11:25,Chittoor,AP-SS-003,FDR-CTR-057,27.3,7100,Planned,Maintenance,Winter
+OUT-2021-057,11/15/2021 13:15,11/15/2021 16:50,Guntur,AP-SS-005,FDR-GNT-031,36.5,9700,Unplanned,Transmission Line Fault,Winter
+OUT-2021-058,11/20/2021 9:40,11/20/2021 13:15,East Godavari,AP-SS-036,FDR-EG-047,39.7,10600,Unplanned,Equipment Failure,Winter
+OUT-2021-059,11/26/2021 15:05,11/26/2021 18:40,Krishna,AP-SS-007,FDR-KRI-023,32.8,8700,Unplanned,Overload,Winter
+OUT-2021-060,12/2/2021 11:30,12/2/2021 18:05,Visakhapatnam,AP-SS-020,FDR-VSP-069,46.5,12400,Planned,Upgradation,Winter
+OUT-2021-061,12/7/2021 14:25,12/7/2021 17:50,Nellore,AP-SS-008,FDR-NLR-016,29.4,7700,Unplanned,Equipment Failure,Winter
+OUT-2021-062,12/13/2021 8:40,12/13/2021 12:15,Anantapur,AP-SS-017,FDR-ATP-037,25.6,6600,Unplanned,Transmission Line Fault,Winter
+OUT-2021-063,12/18/2021 10:15,12/18/2021 16:50,Visakhapatnam,AP-SS-023,FDR-VSP-052,44.3,11800,Planned,Maintenance,Winter
+OUT-2021-064,12/24/2021 13:50,12/24/2021 17:25,Kurnool,AP-SS-034,FDR-KNL-024,33.1,8700,Unplanned,Equipment Failure,Winter
+OUT-2021-065,12/29/2021 9:25,12/29/2021 12:50,Krishna,AP-SS-021,FDR-KRI-047,39.5,10500,Unplanned,Overload,Winter
+OUT-2021-066,1/16/2021 12:35,1/16/2021 16:10,Vizianagaram,AP-SS-030,FDR-VZM-043,26.9,7000,Unplanned,Equipment Failure,Winter
+OUT-2021-067,2/12/2021 8:15,2/12/2021 14:50,Prakasam,AP-SS-009,FDR-PKM-027,34.3,9000,Planned,Maintenance,Winter
+OUT-2021-068,3/18/2021 15:40,3/18/2021 21:15,West Godavari,AP-SS-011,FDR-WG-063,40.1,10700,Unplanned,Transmission Line Fault,Summer
+OUT-2021-069,4/15/2021 11:05,4/15/2021 15:40,East Godavari,AP-SS-036,FDR-EG-016,37.8,10000,Unplanned,Equipment Failure,Summer
+OUT-2021-070,5/19/2021 9:30,5/19/2021 17:05,Visakhapatnam,AP-SS-020,FDR-VSP-078,49.7,13400,Planned,Upgradation,Summer
+OUT-2021-071,6/16/2021 14:45,6/16/2021 20:20,Krishna,AP-SS-007,FDR-KRI-055,43.6,11700,Unplanned,Overload,Summer
+OUT-2021-072,7/13/2021 10:20,7/13/2021 21:55,Guntur,AP-SS-032,FDR-GNT-042,38.9,10400,Unplanned,Weather Related,Monsoon
+OUT-2021-073,8/17/2021 7:55,8/17/2021 18:30,Nellore,AP-SS-035,FDR-NLR-061,31.5,8300,Unplanned,Weather Related,Monsoon
+OUT-2021-074,9/14/2021 13:10,9/14/2021 17:45,Kadapa,AP-SS-039,FDR-KDP-032,28.7,7500,Planned,Maintenance,Monsoon
+OUT-2021-075,10/11/2021 9:35,10/11/2021 18:10,Krishna,AP-SS-021,FDR-KRI-014,41.9,11200,Unplanned,Equipment Failure,Monsoon
+OUT-2021-076,11/18/2021 15:30,11/18/2021 19:05,Anantapur,AP-SS-033,FDR-ATP-048,27.8,7300,Unplanned,Transmission Line Fault,Winter
+OUT-2021-077,12/15/2021 11:15,12/15/2021 14:50,Visakhapatnam,AP-SS-037,FDR-VSP-021,43.1,11500,Unplanned,Equipment Failure,Winter
+OUT-2021-078,1/21/2021 14:40,1/21/2021 18:15,Chittoor,AP-SS-022,FDR-CTR-039,30.2,7900,Unplanned,Equipment Failure,Winter
+OUT-2021-079,2/24/2021 10:25,2/24/2021 16:00,East Godavari,AP-SS-027,FDR-EG-053,41.4,11000,Planned,Maintenance,Winter
+OUT-2021-080,3/23/2021 16:50,3/23/2021 22:25,Visakhapatnam,AP-SS-020,FDR-VSP-095,45.6,12200,Unplanned,Overload,Summer
+OUT-2021-081,4/20/2021 9:15,4/20/2021 14:50,Kurnool,AP-SS-025,FDR-KNL-018,32.3,8500,Unplanned,Equipment Failure,Summer
+OUT-2021-082,5/17/2021 12:40,5/17/2021 20:15,Krishna,AP-SS-007,FDR-KRI-073,38.7,10300,Planned,Upgradation,Summer
+OUT-2021-083,6/22/2021 8:55,6/22/2021 14:30,Guntur,AP-SS-005,FDR-GNT-064,35.4,9400,Unplanned,Equipment Failure,Summer
+OUT-2021-084,7/19/2021 15:20,7/20/2021 3:55,East Godavari,AP-SS-036,FDR-EG-011,47.9,12800,Unplanned,Weather Related,Monsoon
+OUT-2021-085,8/21/2021 11:45,8/21/2021 21:20,Visakhapatnam,AP-SS-023,FDR-VSP-026,51.2,13700,Unplanned,Weather Related,Monsoon
+OUT-2021-086,9/18/2021 9:10,9/18/2021 15:45,Nellore,AP-SS-008,FDR-NLR-057,33.6,8900,Unplanned,Equipment Failure,Monsoon
+OUT-2021-087,10/16/2021 14:35,10/16/2021 22:10,Krishna,AP-SS-021,FDR-KRI-036,42.8,11500,Unplanned,Weather Related,Monsoon
+OUT-2021-088,11/13/2021 10:50,11/13/2021 17:25,West Godavari,AP-SS-028,FDR-WG-045,36.7,9700,Planned,Maintenance,Winter
+OUT-2021-089,12/10/2021 16:15,12/10/2021 19:50,Kadapa,AP-SS-024,FDR-KDP-028,29.5,7700,Unplanned,Equipment Failure,Winter
+OUT-2021-090,1/9/2021 13:05,1/9/2021 16:40,Visakhapatnam,AP-SS-037,FDR-VSP-097,40.3,10700,Unplanned,Transmission Line Fault,Winter
+OUT-2021-091,3/11/2021 14:30,3/11/2021 18:05,Anantapur,AP-SS-017,FDR-ATP-035,31.7,8300,Unplanned,Equipment Failure,Summer
+OUT-2021-092,5/8/2021 9:25,5/8/2021 14:50,Guntur,AP-SS-032,FDR-GNT-059,38.5,10200,Unplanned,Overload,Summer
+OUT-2021-093,7/6/2021 11:10,7/6/2021 20:45,Krishna,AP-SS-007,FDR-KRI-068,44.9,12000,Unplanned,Weather Related,Monsoon
+OUT-2021-094,9/7/2021 14:25,9/7/2021 20:00,East Godavari,AP-SS-027,FDR-EG-033,39.6,10500,Unplanned,Equipment Failure,Monsoon
+OUT-2021-095,11/5/2021 12:15,11/5/2021 15:50,Visakhapatnam,AP-SS-020,FDR-VSP-054,45.3,12100,Planned,Maintenance,Winter
+OUT-2021-096,2/2/2021 8:40,2/2/2021 12:15,Vizianagaram,AP-SS-030,FDR-VZM-026,25.4,6600,Unplanned,Equipment Failure,Winter
+OUT-2021-097,4/5/2021 15:55,4/5/2021 21:30,Srikakulam,AP-SS-029,FDR-SKM-054,30.9,8100,Unplanned,Transmission Line Fault,Summer
+OUT-2021-098,6/7/2021 10:30,6/7/2021 14:05,Prakasam,AP-SS-009,FDR-PKM-019,32.5,8600,Unplanned,Equipment Failure,Summer
+OUT-2021-099,8/9/2021 13:15,8/9/2021 23:50,Visakhapatnam,AP-SS-015,FDR-VSP-086,46.7,12500,Unplanned,Weather Related,Monsoon
+OUT-2021-100,12/21/2021 9:50,12/21/2021 13:25,Chittoor,AP-SS-003,FDR-CTR-041,28.9,7500,Planned,Maintenance,Winter
+OUT-2022-001,1/5/2022 9:20,1/5/2022 15:45,Visakhapatnam,AP-SS-020,FDR-VSP-042,44.6,11900,Planned,Maintenance,Winter
+OUT-2022-002,1/11/2022 14:35,1/11/2022 18:10,Krishna,AP-SS-007,FDR-KRI-051,36.8,9800,Unplanned,Equipment Failure,Winter
+OUT-2022-003,1/16/2022 10:50,1/16/2022 14:25,Guntur,AP-SS-005,FDR-GNT-067,30.3,8000,Unplanned,Transmission Line Fault,Winter
+OUT-2022-004,1/22/2022 8:15,1/22/2022 12:50,East Godavari,AP-SS-036,FDR-EG-029,34.9,9200,Planned,Upgradation,Winter
+OUT-2022-005,1/28/2022 13:40,1/28/2022 17:15,Nellore,AP-SS-008,FDR-NLR-043,28.5,7500,Unplanned,Equipment Failure,Winter
+OUT-2022-006,2/3/2022 11:25,2/3/2022 15:00,Visakhapatnam,AP-SS-023,FDR-VSP-075,47.1,12600,Unplanned,Overload,Winter
+OUT-2022-007,2/9/2022 7:50,2/9/2022 14:25,Kurnool,AP-SS-025,FDR-KNL-061,33.4,8800,Planned,Maintenance,Winter
+OUT-2022-008,2/14/2022 15:05,2/14/2022 18:40,Chittoor,AP-SS-003,FDR-CTR-019,25.7,6700,Unplanned,Equipment Failure,Winter
+OUT-2022-009,2/20/2022 9:30,2/20/2022 14:05,Krishna,AP-SS-021,FDR-KRI-078,39.2,10400,Unplanned,Transmission Line Fault,Winter
+OUT-2022-010,2/25/2022 12:15,2/25/2022 15:50,Anantapur,AP-SS-033,FDR-ATP-032,27.3,7200,Planned,Upgradation,Winter
+OUT-2022-011,3/4/2022 14:40,3/4/2022 20:15,Visakhapatnam,AP-SS-020,FDR-VSP-089,48.5,13000,Unplanned,Equipment Failure,Summer
+OUT-2022-012,3/10/2022 8:25,3/10/2022 13:00,Guntur,AP-SS-032,FDR-GNT-026,35.6,9400,Unplanned,Overload,Summer
+OUT-2022-013,3/15/2022 11:50,3/15/2022 18:25,East Godavari,AP-SS-027,FDR-EG-055,40.8,10900,Planned,Maintenance,Summer
+OUT-2022-014,3/21/2022 13:15,3/21/2022 18:50,Krishna,AP-SS-007,FDR-KRI-013,37.4,9900,Unplanned,Equipment Failure,Summer
+OUT-2022-015,3/26/2022 10:40,3/26/2022 16:15,West Godavari,AP-SS-028,FDR-WG-047,39.7,10600,Unplanned,Transmission Line Fault,Summer
+OUT-2022-016,4/1/2022 7:30,4/1/2022 15:05,Visakhapatnam,AP-SS-037,FDR-VSP-031,43.2,11500,Planned,Upgradation,Summer
+OUT-2022-017,4/7/2022 14:45,4/7/2022 20:20,Kadapa,AP-SS-024,FDR-KDP-049,31.5,8300,Unplanned,Equipment Failure,Summer
+OUT-2022-018,4/12/2022 9:10,4/12/2022 14:45,Nellore,AP-SS-035,FDR-NLR-035,29.6,7800,Unplanned,Overload,Summer
+OUT-2022-019,4/18/2022 12:35,4/18/2022 16:10,Krishna,AP-SS-021,FDR-KRI-064,42.3,11300,Unplanned,Equipment Failure,Summer
+OUT-2022-020,4/23/2022 15:50,4/23/2022 21:25,Visakhapatnam,AP-SS-020,FDR-VSP-057,49.2,13200,Planned,Maintenance,Summer
+OUT-2022-021,4/29/2022 10:15,4/29/2022 15:50,Guntur,AP-SS-005,FDR-GNT-082,38.5,10200,Unplanned,Transmission Line Fault,Summer
+OUT-2022-022,5/5/2022 8:40,5/5/2022 13:15,East Godavari,AP-SS-036,FDR-EG-043,36.2,9600,Unplanned,Equipment Failure,Summer
+OUT-2022-023,5/10/2022 13:05,5/10/2022 18:40,Kurnool,AP-SS-034,FDR-KNL-027,31.9,8400,Unplanned,Overload,Summer
+OUT-2022-024,5/16/2022 11:30,5/16/2022 17:05,Visakhapatnam,AP-SS-023,FDR-VSP-098,46.5,12400,Planned,Upgradation,Summer
+OUT-2022-025,5/21/2022 15:15,5/21/2022 18:50,Krishna,AP-SS-007,FDR-KRI-041,39.6,10500,Unplanned,Equipment Failure,Summer
+OUT-2022-026,5/27/2022 9:40,5/27/2022 15:15,Anantapur,AP-SS-017,FDR-ATP-056,28.1,7300,Unplanned,Transmission Line Fault,Summer
+OUT-2022-027,6/2/2022 12:25,6/2/2022 17:00,West Godavari,AP-SS-011,FDR-WG-031,40.2,10700,Unplanned,Equipment Failure,Summer
+OUT-2022-028,6/8/2022 8:50,6/8/2022 16:25,Visakhapatnam,AP-SS-020,FDR-VSP-016,49.7,13300,Planned,Maintenance,Summer
+OUT-2022-029,6/13/2022 14:15,6/13/2022 19:50,Chittoor,AP-SS-022,FDR-CTR-048,27.4,7200,Unplanned,Overload,Summer
+OUT-2022-030,6/19/2022 10:30,6/19/2022 15:05,Guntur,AP-SS-032,FDR-GNT-073,37.1,9800,Unplanned,Equipment Failure,Summer
+OUT-2022-031,6/24/2022 13:55,6/24/2022 19:30,Krishna,AP-SS-021,FDR-KRI-029,43.5,11600,Unplanned,Transmission Line Fault,Summer
+OUT-2022-032,6/30/2022 7:20,6/30/2022 12:55,East Godavari,AP-SS-027,FDR-EG-057,39.4,10500,Unplanned,Equipment Failure,Summer
+OUT-2022-033,7/5/2022 11:45,7/5/2022 22:20,Visakhapatnam,AP-SS-023,FDR-VSP-084,48.1,12900,Unplanned,Weather Related,Monsoon
+OUT-2022-034,7/11/2022 9:10,7/11/2022 19:45,Srikakulam,AP-SS-029,FDR-SKM-045,35.3,9300,Unplanned,Weather Related,Monsoon
+OUT-2022-035,7/16/2022 15:35,7/16/2022 22:10,Krishna,AP-SS-007,FDR-KRI-062,41.2,11000,Unplanned,Equipment Failure,Monsoon
+OUT-2022-036,7/22/2022 8:25,7/22/2022 16:00,Nellore,AP-SS-008,FDR-NLR-017,33.8,8900,Planned,Maintenance,Monsoon
+OUT-2022-037,7/27/2022 13:50,7/28/2022 2:25,Visakhapatnam,AP-SS-020,FDR-VSP-036,51.3,13700,Unplanned,Weather Related,Monsoon
+OUT-2022-038,8/2/2022 10:15,8/2/2022 15:50,Guntur,AP-SS-005,FDR-GNT-049,38.3,10200,Unplanned,Equipment Failure,Monsoon
+OUT-2022-039,8/8/2022 7:40,8/8/2022 18:15,East Godavari,AP-SS-036,FDR-EG-024,43.6,11600,Unplanned,Weather Related,Monsoon
+OUT-2022-040,8/13/2022 12:05,8/13/2022 17:40,West Godavari,AP-SS-011,FDR-WG-052,37.5,9900,Unplanned,Transmission Line Fault,Monsoon
+OUT-2022-041,8/19/2022 15:30,8/19/2022 22:05,Visakhapatnam,AP-SS-037,FDR-VSP-065,44.7,11900,Unplanned,Weather Related,Monsoon
+OUT-2022-042,8/24/2022 9:55,8/24/2022 16:30,Krishna,AP-SS-021,FDR-KRI-038,45.4,12100,Planned,Upgradation,Monsoon
+OUT-2022-043,8/30/2022 11:20,8/30/2022 16:55,Kadapa,AP-SS-039,FDR-KDP-041,30.2,7900,Unplanned,Equipment Failure,Monsoon
+OUT-2022-044,9/4/2022 14:45,9/5/2022 3:20,Visakhapatnam,AP-SS-020,FDR-VSP-093,53.1,14300,Unplanned,Weather Related,Monsoon
+OUT-2022-045,9/10/2022 8:30,9/10/2022 14:05,Anantapur,AP-SS-033,FDR-ATP-017,29.5,7700,Unplanned,Overload,Monsoon
+OUT-2022-046,9/15/2022 10:15,9/15/2022 16:50,Guntur,AP-SS-032,FDR-GNT-058,39.8,10600,Planned,Maintenance,Monsoon
+OUT-2022-047,9/21/2022 13:40,9/21/2022 20:15,Krishna,AP-SS-007,FDR-KRI-076,40.5,10800,Unplanned,Equipment Failure,Monsoon
+OUT-2022-048,9/26/2022 16:05,9/26/2022 23:40,East Godavari,AP-SS-027,FDR-EG-039,42.7,11400,Unplanned,Weather Related,Monsoon
+OUT-2022-049,10/2/2022 9:25,10/2/2022 15:00,Visakhapatnam,AP-SS-023,FDR-VSP-071,47.6,12700,Unplanned,Equipment Failure,Monsoon
+OUT-2022-050,10/7/2022 12:50,10/7/2022 20:25,Nellore,AP-SS-035,FDR-NLR-062,34.2,9100,Unplanned,Weather Related,Monsoon
+OUT-2022-051,10/13/2022 15:15,10/13/2022 20:50,Kurnool,AP-SS-025,FDR-KNL-036,36.8,9800,Unplanned,Transmission Line Fault,Monsoon
+OUT-2022-052,10/18/2022 8:40,10/18/2022 16:15,Visakhapatnam,AP-SS-020,FDR-VSP-055,49.3,13200,Planned,Upgradation,Monsoon
+OUT-2022-053,10/24/2022 11:25,10/24/2022 19:00,Krishna,AP-SS-021,FDR-KRI-017,43.8,11700,Unplanned,Weather Related,Monsoon
+OUT-2022-054,10/29/2022 14:50,10/29/2022 19:25,West Godavari,AP-SS-028,FDR-WG-038,38.9,10300,Unplanned,Equipment Failure,Monsoon
+OUT-2022-055,11/4/2022 10:15,11/4/2022 13:50,Visakhapatnam,AP-SS-037,FDR-VSP-024,45.9,12300,Unplanned,Equipment Failure,Winter
+OUT-2022-056,11/9/2022 7:35,11/9/2022 11:10,Chittoor,AP-SS-003,FDR-CTR-032,28.1,7300,Planned,Maintenance,Winter
+OUT-2022-057,11/15/2022 13:20,11/15/2022 16:55,Guntur,AP-SS-005,FDR-GNT-077,37.2,9900,Unplanned,Transmission Line Fault,Winter
+OUT-2022-058,11/20/2022 9:45,11/20/2022 13:20,East Godavari,AP-SS-036,FDR-EG-045,40.6,10800,Unplanned,Equipment Failure,Winter
+OUT-2022-059,11/26/2022 15:10,11/26/2022 18:45,Krishna,AP-SS-007,FDR-KRI-059,33.5,8900,Unplanned,Overload,Winter
+OUT-2022-060,12/2/2022 11:35,12/2/2022 18:10,Visakhapatnam,AP-SS-020,FDR-VSP-019,47.3,12600,Planned,Upgradation,Winter
+OUT-2022-061,12/7/2022 14:20,12/7/2022 17:55,Nellore,AP-SS-008,FDR-NLR-054,30.7,8100,Unplanned,Equipment Failure,Winter
+OUT-2022-062,12/13/2022 8:50,12/13/2022 12:25,Anantapur,AP-SS-017,FDR-ATP-028,26.5,6900,Unplanned,Transmission Line Fault,Winter
+OUT-2022-063,12/18/2022 10:25,12/18/2022 16:00,Visakhapatnam,AP-SS-023,FDR-VSP-046,45.8,12200,Planned,Maintenance,Winter
+OUT-2022-064,12/24/2022 13:40,12/24/2022 17:15,Kurnool,AP-SS-034,FDR-KNL-051,34.6,9200,Unplanned,Equipment Failure,Winter
+OUT-2022-065,12/29/2022 9:15,12/29/2022 12:50,Krishna,AP-SS-021,FDR-KRI-081,41.2,11000,Unplanned,Overload,Winter
+OUT-2022-066,1/19/2022 12:30,1/19/2022 16:05,Vizianagaram,AP-SS-030,FDR-VZM-039,27.5,7200,Unplanned,Equipment Failure,Winter
+OUT-2022-067,2/17/2022 8:45,2/17/2022 15:20,Prakasam,AP-SS-009,FDR-PKM-023,35.1,9300,Planned,Maintenance,Winter
+OUT-2022-068,3/24/2022 15:10,3/24/2022 20:45,West Godavari,AP-SS-011,FDR-WG-067,41.3,11000,Unplanned,Transmission Line Fault,Summer
+OUT-2022-069,4/21/2022 11:25,4/21/2022 16:00,East Godavari,AP-SS-036,FDR-EG-013,39.5,10500,Unplanned,Equipment Failure,Summer
+OUT-2022-070,5/25/2022 9:50,5/25/2022 17:25,Visakhapatnam,AP-SS-020,FDR-VSP-082,50.6,13600,Planned,Upgradation,Summer
+OUT-2022-071,6/22/2022 14:15,6/22/2022 19:50,Krishna,AP-SS-007,FDR-KRI-044,44.7,11900,Unplanned,Overload,Summer
+OUT-2022-072,7/19/2022 10:40,7/19/2022 22:15,Guntur,AP-SS-032,FDR-GNT-037,40.1,10700,Unplanned,Weather Related,Monsoon
+OUT-2022-073,8/23/2022 7:55,8/23/2022 18:30,Nellore,AP-SS-035,FDR-NLR-026,32.4,8600,Unplanned,Weather Related,Monsoon
+OUT-2022-074,9/20/2022 13:30,9/20/2022 18:05,Kadapa,AP-SS-039,FDR-KDP-035,29.8,7800,Planned,Maintenance,Monsoon
+OUT-2022-075,10/17/2022 9:45,10/17/2022 18:20,Krishna,AP-SS-021,FDR-KRI-072,42.5,11300,Unplanned,Equipment Failure,Monsoon
+OUT-2022-076,11/22/2022 15:05,11/22/2022 18:40,Anantapur,AP-SS-033,FDR-ATP-043,28.7,7500,Unplanned,Transmission Line Fault,Winter
+OUT-2022-077,12/19/2022 11:35,12/19/2022 15:10,Visakhapatnam,AP-SS-037,FDR-VSP-061,44.2,11800,Unplanned,Equipment Failure,Winter
+OUT-2022-078,1/25/2022 14:20,1/25/2022 17:55,Chittoor,AP-SS-022,FDR-CTR-016,31.4,8300,Unplanned,Equipment Failure,Winter
+OUT-2022-079,2/27/2022 10:55,2/27/2022 16:30,East Godavari,AP-SS-027,FDR-EG-066,42.1,11200,Planned,Maintenance,Winter
+OUT-2022-080,3/29/2022 16:30,3/29/2022 22:05,Visakhapatnam,AP-SS-020,FDR-VSP-028,46.4,12400,Unplanned,Overload,Summer
+OUT-2022-081,4/26/2022 9:25,4/26/2022 14:00,Kurnool,AP-SS-025,FDR-KNL-055,33.8,8900,Unplanned,Equipment Failure,Summer
+OUT-2022-082,5/28/2022 12:10,5/28/2022 19:45,Krishna,AP-SS-007,FDR-KRI-022,39.4,10500,Planned,Upgradation,Summer
+OUT-2022-083,6/25/2022 8:35,6/25/2022 14:10,Guntur,AP-SS-005,FDR-GNT-068,36.3,9600,Unplanned,Equipment Failure,Summer
+OUT-2022-084,7/23/2022 15:50,7/24/2022 4:25,East Godavari,AP-SS-036,FDR-EG-051,48.7,13000,Unplanned,Weather Related,Monsoon
+OUT-2022-085,8/27/2022 11:15,8/27/2022 20:50,Visakhapatnam,AP-SS-023,FDR-VSP-079,52.5,14100,Unplanned,Weather Related,Monsoon
+OUT-2022-086,9/24/2022 9:40,9/24/2022 15:15,Nellore,AP-SS-008,FDR-NLR-047,34.8,9200,Unplanned,Equipment Failure,Monsoon
+OUT-2022-087,10/22/2022 14:05,10/22/2022 21:40,Krishna,AP-SS-021,FDR-KRI-033,43.4,11600,Unplanned,Weather Related,Monsoon
+OUT-2022-088,11/23/2022 10:30,11/23/2022 17:05,West Godavari,AP-SS-028,FDR-WG-043,37.6,10000,Planned,Maintenance,Winter
+OUT-2022-089,12/17/2022 16:45,12/17/2022 20:20,Kadapa,AP-SS-024,FDR-KDP-048,30.2,7900,Unplanned,Equipment Failure,Winter
+OUT-2022-090,1/14/2022 13:35,1/14/2022 17:10,Visakhapatnam,AP-SS-037,FDR-VSP-092,41.7,11100,Unplanned,Transmission Line Fault,Winter
+OUT-2022-091,3/14/2022 14:50,3/14/2022 18:25,Anantapur,AP-SS-017,FDR-ATP-031,32.3,8500,Unplanned,Equipment Failure,Summer
+OUT-2022-092,5/14/2022 9:15,5/14/2022 14:50,Guntur,AP-SS-032,FDR-GNT-054,39.7,10600,Unplanned,Overload,Summer
+OUT-2022-093,7/14/2022 11:40,7/14/2022 21:15,Krishna,AP-SS-007,FDR-KRI-063,45.3,12100,Unplanned,Weather Related,Monsoon
+OUT-2022-094,9/14/2022 14:15,9/14/2022 19:50,East Godavari,AP-SS-027,FDR-EG-021,40.9,10900,Unplanned,Equipment Failure,Monsoon
+OUT-2022-095,11/14/2022 12:45,11/14/2022 16:20,Visakhapatnam,AP-SS-020,FDR-VSP-037,46.8,12500,Planned,Maintenance,Winter
+OUT-2022-096,2/5/2022 8:25,2/5/2022 12:00,Vizianagaram,AP-SS-030,FDR-VZM-019,26.3,6800,Unplanned,Equipment Failure,Winter
+OUT-2022-097,4/5/2022 15:35,4/5/2022 21:10,Srikakulam,AP-SS-029,FDR-SKM-059,31.8,8400,Unplanned,Transmission Line Fault,Summer
+OUT-2022-098,6/5/2022 10:20,6/5/2022 13:55,Prakasam,AP-SS-009,FDR-PKM-027,33.4,8900,Unplanned,Equipment Failure,Summer
+OUT-2022-099,8/5/2022 13:45,8/6/2022 0:20,Visakhapatnam,AP-SS-015,FDR-VSP-043,47.6,12700,Unplanned,Weather Related,Monsoon
+OUT-2022-100,12/5/2022 9:10,12/5/2022 12:45,Chittoor,AP-SS-003,FDR-CTR-053,29.5,7700,Planned,Maintenance,Winter
+OUT-2023-001,1/6/2023 9:15,1/6/2023 15:40,Visakhapatnam,AP-SS-020,FDR-VSP-025,45.2,12100,Planned,Maintenance,Winter
+OUT-2023-002,1/11/2023 14:30,1/11/2023 18:05,Krishna,AP-SS-007,FDR-KRI-056,37.4,9900,Unplanned,Equipment Failure,Winter
+OUT-2023-003,1/17/2023 10:45,1/17/2023 14:20,Guntur,AP-SS-005,FDR-GNT-038,31.6,8300,Unplanned,Transmission Line Fault,Winter
+OUT-2023-004,1/22/2023 8:20,1/22/2023 12:55,East Godavari,AP-SS-036,FDR-EG-062,35.8,9500,Planned,Upgradation,Winter
+OUT-2023-005,1/28/2023 13:35,1/28/2023 17:10,Nellore,AP-SS-008,FDR-NLR-031,29.2,7700,Unplanned,Equipment Failure,Winter
+OUT-2023-006,2/3/2023 11:20,2/3/2023 14:55,Visakhapatnam,AP-SS-023,FDR-VSP-073,47.8,12800,Unplanned,Overload,Winter
+OUT-2023-007,2/9/2023 7:55,2/9/2023 14:30,Kurnool,AP-SS-025,FDR-KNL-042,34.5,9100,Planned,Maintenance,Winter
+OUT-2023-008,2/14/2023 15:10,2/14/2023 18:45,Chittoor,AP-SS-003,FDR-CTR-023,26.7,7000,Unplanned,Equipment Failure,Winter
+OUT-2023-009,2/20/2023 9:35,2/20/2023 14:10,Krishna,AP-SS-021,FDR-KRI-067,39.8,10600,Unplanned,Transmission Line Fault,Winter
+OUT-2023-010,2/25/2023 12:25,2/25/2023 16:00,Anantapur,AP-SS-033,FDR-ATP-049,28.4,7400,Planned,Upgradation,Winter
+OUT-2023-011,3/4/2023 14:45,3/4/2023 20:20,Visakhapatnam,AP-SS-020,FDR-VSP-059,49.3,13200,Unplanned,Equipment Failure,Summer
+OUT-2023-012,3/10/2023 8:30,3/10/2023 13:05,Guntur,AP-SS-032,FDR-GNT-083,36.5,9700,Unplanned,Overload,Summer
+OUT-2023-013,3/15/2023 11:55,3/15/2023 18:30,East Godavari,AP-SS-027,FDR-EG-035,41.7,11100,Planned,Maintenance,Summer
+OUT-2023-014,3/21/2023 13:20,3/21/2023 18:55,Krishna,AP-SS-007,FDR-KRI-021,38.3,10200,Unplanned,Equipment Failure,Summer
+OUT-2023-015,3/26/2023 10:45,3/26/2023 16:20,West Godavari,AP-SS-028,FDR-WG-059,40.5,10800,Unplanned,Transmission Line Fault,Summer
+OUT-2023-016,4/1/2023 7:35,4/1/2023 15:10,Visakhapatnam,AP-SS-037,FDR-VSP-018,44.6,11900,Planned,Upgradation,Summer
+OUT-2023-017,4/7/2023 14:50,4/7/2023 20:25,Kadapa,AP-SS-024,FDR-KDP-045,32.2,8500,Unplanned,Equipment Failure,Summer
+OUT-2023-018,4/12/2023 9:15,4/12/2023 14:50,Nellore,AP-SS-035,FDR-NLR-053,30.4,8000,Unplanned,Overload,Summer
+OUT-2023-019,4/18/2023 12:40,4/18/2023 16:15,Krishna,AP-SS-021,FDR-KRI-077,43.1,11500,Unplanned,Equipment Failure,Summer
+OUT-2023-020,4/23/2023 15:55,4/23/2023 21:30,Visakhapatnam,AP-SS-020,FDR-VSP-096,49.8,13300,Planned,Maintenance,Summer
+OUT-2023-021,4/29/2023 10:20,4/29/2023 15:55,Guntur,AP-SS-005,FDR-GNT-029,39.2,10400,Unplanned,Transmission Line Fault,Summer
+OUT-2023-022,5/5/2023 8:45,5/5/2023 13:20,East Godavari,AP-SS-036,FDR-EG-068,37.6,10000,Unplanned,Equipment Failure,Summer
+OUT-2023-023,5/10/2023 13:10,5/10/2023 18:45,Kurnool,AP-SS-034,FDR-KNL-033,32.5,8600,Unplanned,Overload,Summer
