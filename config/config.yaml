@@ -1,0 +1,68 @@
+# Data paths configuration
+data_files:
+  demand: "data/raw/power_supply_data.csv"
+  outages: "data/raw/outage_data.csv"
+  weather: "data/raw/weather_data.csv"
+  grid_infra: "data/raw/grid_infra_data.csv"
+  critical_infra: "data/raw/crit_infra_data.csv"
+
+# Output paths
+processed_data_dir: "data/processed/"
+output_dir: "outputs/"
+
+# Processing parameters
+date_range:
+  start_date: "2020-05-14"
+  end_date: "2023-05-14"
+
+# Modeling parameters
+forecast:
+  horizon_days: 7
+  train_test_split: 0.8
+  features:
+    - "dayofweek"
+    - "month"
+    - "is_weekend"
+    - "temperature_c"
+    - "is_hot_day"
+    - "is_rainy_day"
+
+outage_risk:
+  prediction_window_hours: 24
+  positive_class_weight: 3  # Give higher weight to catching potential outages
+  features:
+    - "temperature_c"
+    - "precipitation_mm"
+    - "utilization_ratio"
+    - "is_weekend"
+    - "peak_demand_mw"
+
+load_shedding:
+  max_outage_duration_hours: 4  # Max duration for a planned outage
+  min_hours_between_outages: 48  # Min time between outages for same district
+  critical_facility_weight: 10   # Priority multiplier for critical facilities
+  hospital_weight: 20            # Even higher priority for hospitals
+  priority_thresholds:
+    - 0.9  # Tier 1 protection (near complete)
+    - 0.7  # Tier 2 protection (significant)
+    - 0.5  # Tier 3 protection (moderate)
+    - 0.0  # Tier 4 (minimal protection)
+
+# Visualization settings
+visualizations:
+  map_center: [16.5, 80.6]  # Approximate center of Andhra Pradesh
+  map_zoom: 7
+  demand_color: "#1f77b4"
+  outage_color: "#d62728"
+  district_colormap: "YlOrRd"
+  priority_colors:
+    1: "#d73027"  # High priority (red)
+    2: "#fc8d59"  # Medium-high priority (orange)
+    3: "#fee090"  # Medium priority (yellow)
+    4: "#e0f3f8"  # Low priority (light blue)
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/processing.log"

@@ -1,0 +1,58 @@
+﻿facility_id,name,type,district,location,latitude,longitude,priority_level,backup_power,avg_load_kw
+CI-HSP-001,King George Hospital,Hospital - Tertiary,Visakhapatnam,Maharanipeta,17.7134,83.3013,1,Yes-Full,1250
+CI-HSP-002,Government General Hospital,Hospital - Tertiary,Guntur,Guntur,16.3067,80.4365,1,Yes-Full,980
+CI-HSP-003,RIMS Government Hospital,Hospital - Secondary,Kadapa,Kadapa,14.4767,78.8228,1,Yes-Partial,640
+CI-HSP-004,Government General Hospital,Hospital - Tertiary,Kurnool,Kurnool,15.8281,78.0373,1,Yes-Full,850
+CI-HSP-005,District Hospital,Hospital - Secondary,Srikakulam,Srikakulam,18.2949,83.8936,2,Yes-Partial,420
+CI-HSP-006,SVIMS Super Specialty Hospital,Hospital - Tertiary,Chittoor,Tirupati,13.6398,79.4012,1,Yes-Full,1100
+CI-HSP-007,Area Hospital,Hospital - Secondary,Anantapur,Anantapur,14.6819,77.6006,2,Yes-Partial,480
+CI-HSP-008,District Hospital,Hospital - Secondary,Nellore,Nellore,14.4426,79.9865,2,Yes-Partial,520
+CI-HSP-009,Government General Hospital,Hospital - Tertiary,East Godavari,Rajahmundry,16.9891,81.7837,1,Yes-Full,780
+CI-HSP-010,Area Hospital,Hospital - Secondary,West Godavari,Eluru,16.7107,81.0952,2,Yes-Partial,450
+CI-WTR-001,Greater Visakha Water Treatment Plant,Water Treatment,Visakhapatnam,Simhachalam,17.7474,83.2483,1,Yes-Partial,920
+CI-WTR-002,Krishna Water Treatment Plant,Water Treatment,Krishna,Vijayawada,16.4859,80.6725,1,Yes-Partial,860
+CI-WTR-003,Tungabhadra Water Treatment Plant,Water Treatment,Kurnool,Kurnool,15.8042,78.0239,1,Yes-Partial,580
+CI-WTR-004,Godavari Water Treatment Plant,Water Treatment,East Godavari,Rajahmundry,16.9947,81.7891,1,Yes-Partial,640
+CI-WTR-005,Pennar Water Treatment Plant,Water Treatment,Nellore,Nellore,14.4476,79.9772,1,Yes-Partial,520
+CI-COM-001,AP State Data Center,Communications,Krishna,Vijayawada,16.5193,80.6305,1,Yes-Full,620
+CI-COM-002,BSNL Main Exchange,Communications,Visakhapatnam,Dabagardens,17.7289,83.3051,1,Yes-Full,480
+CI-COM-003,Regional Telecom Center,Communications,Guntur,Guntur,16.3115,80.4392,2,Yes-Full,320
+CI-COM-004,District Network Operations Center,Communications,Chittoor,Tirupati,13.6288,79.4192,2,Yes-Partial,280
+CI-COM-005,Coastal Communication Hub,Communications,East Godavari,Kakinada,16.9391,82.2475,2,Yes-Partial,340
+CI-SEC-001,AP Police Headquarters,Security,Krishna,Vijayawada,16.5107,80.6287,1,Yes-Full,380
+CI-SEC-002,Regional Police Control Room,Security,Visakhapatnam,Suryabagh,17.7112,83.2984,1,Yes-Full,280
+CI-SEC-003,District Police Office,Security,Anantapur,Anantapur,14.6819,77.6006,2,Yes-Partial,230
+CI-SEC-004,Central Prison,Security,Visakhapatnam,Visakhapatnam,17.7516,83.2185,1,Yes-Full,420
+CI-SEC-005,District Police Office,Security,Guntur,Guntur,16.3063,80.4483,2,Yes-Partial,240
+CI-GOV-001,AP Secretariat Complex,Government,Krishna,Velagapudi,16.5784,80.5069,1,Yes-Full,750
+CI-GOV-002,District Collectorate,Government,Visakhapatnam,Visakhapatnam,17.7245,83.3147,2,Yes-Partial,320
+CI-GOV-003,District Collectorate,Government,Chittoor,Chittoor,13.2172,79.1003,2,Yes-Partial,290
+CI-GOV-004,High Court Complex,Government,Krishna,Amaravati,16.5162,80.5383,1,Yes-Full,560
+CI-GOV-005,District Collectorate,Government,Kadapa,Kadapa,14.4747,78.8228,2,Yes-Partial,280
+CI-TRN-001,Visakhapatnam Railway Station,Transportation,Visakhapatnam,Gnanapuram,17.7156,83.2982,2,Yes-Partial,420
+CI-TRN-002,Vijayawada Railway Station,Transportation,Krishna,Vijayawada,16.5152,80.6252,2,Yes-Partial,480
+CI-TRN-003,Tirupati Railway Station,Transportation,Chittoor,Tirupati,13.6288,79.4212,2,Yes-Partial,350
+CI-TRN-004,Visakhapatnam Airport,Airport,Visakhapatnam,Visakhapatnam,17.7274,83.2243,1,Yes-Full,920
+CI-TRN-005,Vijayawada Airport,Airport,Krishna,Gannavaram,16.5304,80.7967,1,Yes-Full,750
+CI-FOD-001,Food Corporation Storage,Food Storage,Krishna,Vijayawada,16.5057,80.641,2,Yes-Partial,380
+CI-FOD-002,AP State Grain Storage,Food Storage,Guntur,Guntur,16.3089,80.442,2,Yes-Partial,320
+CI-FOD-003,Regional Cold Storage Facility,Food Storage,West Godavari,Tadepalligudem,16.8139,81.5228,2,No,480
+CI-EDU-001,Andhra University,Education,Visakhapatnam,Visakhapatnam,17.7285,83.3198,3,Yes-Partial,580
+CI-EDU-002,SV University,Education,Chittoor,Tirupati,13.6371,79.404,3,Yes-Partial,490
+CI-EDU-003,ANU Campus,Education,Guntur,Guntur,16.3615,80.4376,3,Yes-Partial,520
+CI-FIN-001,Reserve Bank of India,Financial,Visakhapatnam,Visakhapatnam,17.7066,83.3024,2,Yes-Full,290
+CI-FIN-002,AP State Bank Hub,Financial,Krishna,Vijayawada,16.5107,80.6359,2,Yes-Full,340
+CI-FIN-003,Treasury Operations Center,Financial,Guntur,Guntur,16.3007,80.4457,2,Yes-Full,260
+CI-IND-001,Visakhapatnam Steel Plant,Industrial,Visakhapatnam,Gajuwaka,17.6325,83.1621,2,Yes-Full,8500
+CI-IND-002,Hindustan Shipyard,Industrial,Visakhapatnam,Scindia,17.6964,83.2718,2,Yes-Full,4200
+CI-IND-003,APIIC Industrial Park,Industrial,Krishna,Vijayawada,16.4408,80.7175,2,Yes-Partial,3800
+CI-IND-004,Krishnapatnam Port,Industrial,Nellore,Krishnapatnam,14.2574,80.1216,2,Yes-Full,2900
+CI-IND-005,Sri City Industrial Park,Industrial,Chittoor,Sri City,13.5359,80.0159,2,Yes-Partial,3600
+CI-POW-001,APGENCO Thermal Power Station,Power Generation,Krishna,Ibrahimpatnam,16.5925,80.5211,1,Yes-Full,1800
+CI-POW-002,Simhadri Thermal Power Station,Power Generation,Visakhapatnam,Deepalametta,17.6747,83.2329,1,Yes-Full,2200
+CI-POW-003,Rayalaseema Thermal Power Plant,Power Generation,Kadapa,Kadapa,14.5739,78.7361,1,Yes-Full,1950
+CI-EMG-001,State Emergency Operations Center,Emergency Services,Krishna,Vijayawada,16.5145,80.6323,1,Yes-Full,290
+CI-EMG-002,District Emergency Center,Emergency Services,Visakhapatnam,Visakhapatnam,17.7248,83.3195,1,Yes-Full,240
+CI-EMG-003,Fire Command Control,Emergency Services,Guntur,Guntur,16.3098,80.4377,1,Yes-Full,210
+CI-EMG-004,Regional Disaster Response Force,Emergency Services,East Godavari,Kakinada,16.9427,82.2363,1,Yes-Full,320
+CI-EMG-005,District Emergency Center,Emergency Services,Chittoor,Tirupati,13.6288,79.4192,1,Yes-Full,220
