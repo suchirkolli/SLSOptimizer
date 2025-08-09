@@ -4,30 +4,51 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
 venv/
 ENV/
 
-# Jupyter Notebooks
+# Configuration with secrets
+config/config.yaml
+
+# Jupyter Notebook
 .ipynb_checkpoints
 
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
+# Data files 
+# (may want to gitignore large data files but keep structure)
+*.csv
+*.parquet
+*.pkl
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-
-# Environment variables
-.env
-.env.local
-
-# IDE specific files
+# IDE files
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# Logs
+*.log
+logs/
+
+# Local development
+.env
+.env.local
+
+# Docker
+.dockerignore
