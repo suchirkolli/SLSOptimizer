@@ -37,51 +37,111 @@ def calculate_impact_scores(df: pd.DataFrame, critical_infra: pd.DataFrame = Non
     return df
 
 
-def allocate_load_shedding(df: pd.DataFrame, target_reduction_mw: float, max_pct_per_district: float = 0.3):
+def allocate_load_shedding(df: pd.DataFrame, target_reduction_mw: float,
+                           max_pct_per_district: float = 0.1,
+                           max_hours_per_district: int = 2):
+    """
+    Allocate load shedding (MW) across districts with a per-district cap,
+    and compute a schedule that respects a max number of outage hours per district.
+    Returns allocations DataFrame (with shed_mw) and summary dict.
+    """
     df = df.copy().sort_values("impact_score")
     allocations = []
     total_shed = 0.0
 
     for _, row in df.iterrows():
-        # read peak_demand_mw as the demand metric
         demand = float(row.get("peak_demand_mw", 0) or 0)
-        max_shed = demand * max_pct_per_district
+        # maximum MW we allow from this district
+        max_shed_mw = demand * max_pct_per_district
         need = target_reduction_mw - total_shed
-        shed = 0.0 if need <= 0 else min(max_shed, need)
-        allocations.append(
-            {
-                "district_id": row["district_id"],
-                "district_name": row.get("district_name", row["district_id"]),
-                "peak_demand_mw": demand,
-                "shed_mw": shed,
-                "shed_pct": (shed / demand * 100) if demand > 0 else 0.0,
-                "impact_score": row["impact_score"],
-            }
-        )
+        if need <= 0:
+            shed = 0.0
+        else:
+            shed = min(max_shed_mw, need)
+        allocations.append({
+            "district_id": row["district_id"],
+            "district_name": row.get("district_name", row["district_id"]),
+            "peak_demand_mw": demand,
+            "shed_mw": shed,
+            "shed_pct": (shed / demand * 100) if demand > 0 else 0.0,
+            "impact_score": row["impact_score"]
+        })
         total_shed += shed
         if total_shed >= target_reduction_mw:
-            break
+            # still append remaining districts as zero (so later schedule includes them)
+            # continue building allocations for completeness
+            pass
 
     alloc_df = pd.DataFrame(allocations)
-    summary = {"total_reduction": float(alloc_df["shed_mw"].sum()), "target": float(target_reduction_mw)}
+
+    summary = {
+        "total_reduction": float(alloc_df["shed_mw"].sum()),
+        "target": float(target_reduction_mw)
+    }
+
+    # Also compute a suggested schedule based on shed_mw -> hours, respecting max_hours_per_district
+    schedule_df, hourly_totals = generate_simple_schedule(alloc_df, time_blocks=24, max_hours_per_district=max_hours_per_district)
+
+    # return allocations and summary, schedule can be created separately if needed
     return alloc_df, summary
 
 
-def generate_simple_schedule(alloc_df: pd.DataFrame, time_blocks: int = 24):
-    n = len(alloc_df)
-    if n == 0:
+def generate_simple_schedule(alloc_df: pd.DataFrame, time_blocks: int = 24, max_hours_per_district: int = 2):
+    """
+    Generate a binary schedule for each district such that:
+      - number of outage hours for district approx = round((shed_mw / peak_demand_mw) * 24)
+      - number of hours is clamped to [0, max_hours_per_district]
+      - outages are assigned randomly across the day (seeded for reproducibility)
+    Returns schedule_df (one row per district) and hourly_totals (array length time_blocks).
+    """
+    if alloc_df is None or alloc_df.empty:
         return pd.DataFrame(), np.zeros(time_blocks)
+
     np.random.seed(42)
-    schedule = np.zeros((n, time_blocks))
-    hourly_reduction = alloc_df["shed_mw"].values / time_blocks
+    n = len(alloc_df)
+    schedule = np.zeros((n, time_blocks), dtype=float)
+    hourly_reduction = []
+
+    # compute hours per district based on proportion of demand
+    for i, row in alloc_df.reset_index(drop=True).iterrows():
+        demand = float(row.get("peak_demand_mw", 0) or 0)
+        shed = float(row.get("shed_mw", 0) or 0)
+
+        if demand > 0 and shed > 0:
+            fraction_of_day = shed / demand  # fraction of full outage-equivalent over 24 hours
+            hours = int(round(fraction_of_day * time_blocks))
+            # clamp hours
+            hours = max(0, min(max_hours_per_district, hours))
+        else:
+            hours = 0
+
+        # if hours=0 but shed>0 and demand>0, ensure at least 1 hour if small shed exists and max_hours_per_district>0
+        if hours == 0 and shed > 0 and demand > 0 and max_hours_per_district > 0:
+            hours = 1
+
+        # choose hours randomly without replacement
+        if hours > 0:
+            chosen = np.random.choice(time_blocks, size=hours, replace=False)
+            schedule[i, chosen] = 1.0
+
+        # store per-district hourly reduction estimate (for information only)
+        per_hour_reduction = shed / max(hours, 1) if hours > 0 else 0.0
+        hourly_reduction.append(per_hour_reduction)
+
+    # compute hourly totals (MW) assuming per-district per-hour reduction estimated above
+    hourly_totals = np.zeros(time_blocks, dtype=float)
     for i in range(n):
-        hours = np.random.choice(time_blocks, size=max(1, time_blocks // 3), replace=False)
-        schedule[i, hours] = 1
-    schedule_df = pd.DataFrame(schedule, index=alloc_df["district_id"], columns=[f"h{h:02d}" for h in range(time_blocks)])
-    schedule_df["district_id"] = alloc_df["district_id"].values
-    schedule_df["district_name"] = alloc_df["district_name"].values
-    schedule_df["total_reduction_mw"] = alloc_df["shed_mw"].values
-    hourly_totals = (schedule * hourly_reduction[:, None]).sum(axis=0)
+        per_hour = hourly_reduction[i]
+        hourly_totals += schedule[i] * per_hour
+
+    # Format schedule_df: columns h00..h23 plus district_id, district_name, total_reduction_mw
+    idx = alloc_df.reset_index(drop=True)
+    cols = [f"h{h:02d}" for h in range(time_blocks)]
+    schedule_df = pd.DataFrame(schedule, columns=cols)
+    schedule_df["district_id"] = idx["district_id"].values
+    schedule_df["district_name"] = idx.get("district_name", idx["district_id"]).values
+    schedule_df["total_reduction_mw"] = idx["shed_mw"].values
+
     return schedule_df, hourly_totals
 
 

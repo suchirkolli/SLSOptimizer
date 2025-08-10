@@ -5,20 +5,19 @@ End-to-end pipeline runner for Smart Load Shedding Optimizer.
 Usage (from project root):
   python scripts/run_pipeline.py --deficit 1500 --use-models
 
-This script ensures the project root is on sys.path so `from services...` imports work
-whether you run the script from the repo root or from the scripts/ directory.
+This script ensures the project root is on sys.path so `from services...` imports work.
 """
 import os
 import sys
-# Ensure project root (parent of scripts/) is on sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import argparse
 from pathlib import Path
 import logging
 import pandas as pd
 
-# Import project modules (now that sys.path is set)
+# Ensure project root is on sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Project imports
 from services.predictor import predict_snapshot_all, get_latest_snapshot
 from optimizer.load_shedding_optimizer import calculate_impact_scores, allocate_load_shedding, generate_simple_schedule
 
@@ -36,24 +35,35 @@ def save_outputs(out_dir: Path, forecasts: pd.DataFrame, risks: pd.DataFrame, al
 
 
 def prepare_input_for_optimizer(forecasts: pd.DataFrame, risks: pd.DataFrame, district_ref_path: Path, use_predicted: bool = True) -> pd.DataFrame:
+    """
+    Merge forecasts and risks and join district reference safely.
+    Only selects columns from the district ref that actually exist.
+    """
     df = forecasts.merge(risks[['district_id', 'outage_risk']], on='district_id', how='left')
+
     # unify demand column names
     if use_predicted and 'predicted_peak_demand_mw' in df.columns:
         df = df.rename(columns={'predicted_peak_demand_mw': 'peak_demand_mw'})
+
     # fallback candidates
     for cand in ['peak_demand_mw', 'predicted_peak_demand_mw', 'demand_mw']:
         if cand in df.columns:
             df = df.rename(columns={cand: 'peak_demand_mw'})
             break
-    # attach district reference (pop_density, district_name) if available
+
+    # Attach district reference safely: only available columns
     if district_ref_path.exists():
         ref = pd.read_csv(district_ref_path)
-        keep = [c for c in ['district_id', 'pop_density', 'district_name'] if c in ref.columns]
-        if keep:
-            df = df.merge(ref[keep], on='district_id', how='left')
+        possible = ['district_id', 'pop_density', 'district_name', 'latitude', 'longitude']
+        avail = [c for c in possible if c in ref.columns]
+        if 'district_id' not in avail:
+            LOG.warning("District reference does not contain 'district_id' column; skipping merge")
+        else:
+            df = df.merge(ref[avail], on='district_id', how='left')
     else:
         LOG.warning("District reference not found at %s", district_ref_path)
-    # ensure numeric columns
+
+    # Ensure numeric columns exist
     df['peak_demand_mw'] = pd.to_numeric(df.get('peak_demand_mw', 0), errors='coerce').fillna(0.0)
     df['outage_risk'] = pd.to_numeric(df.get('outage_risk', 0), errors='coerce').fillna(0.0)
     return df
@@ -90,7 +100,7 @@ def run(deficit_mw: float, out_dir: str = "outputs", use_models: bool = True):
 
     # 4) Calculate impact scores and allocate
     scored = calculate_impact_scores(input_df, critical)
-    allocations, summary = allocate_load_shedding(scored, float(deficit_mw))
+    allocations, summary = allocate_load_shedding(scored, float(deficit_mw), max_pct_per_district=0.05, max_hours_per_district=1)
     schedule_df, hourly_totals = generate_simple_schedule(allocations)
 
     LOG.info("Allocation complete. total_reduction=%.2f target=%.2f", summary['total_reduction'], summary['target'])
