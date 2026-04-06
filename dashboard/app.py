@@ -25,9 +25,11 @@ except Exception:
 from services.predictor import predict_snapshot_all, get_latest_snapshot
 from optimizer.load_shedding_optimizer import calculate_impact_scores, allocate_load_shedding, generate_simple_schedule
 
-OUT_DIR = Path("outputs")
-DIST_REF = Path("data/geographic/ap_districts_reference.csv")
-MODELING_DATA = Path("data/processed/modeling_dataset.parquet")
+BASE_DIR = Path(__file__).resolve().parents[1]
+OUT_DIR = BASE_DIR / "outputs"
+DIST_REF = BASE_DIR / "data" / "geographic" / "ap_districts_reference.csv"
+MODELING_DATA = BASE_DIR / "data" / "processed" / "modeling_dataset.parquet"
+CRITICAL_INFRA = BASE_DIR / "data" / "processed" / "critical_infra.parquet"
 
 st.set_page_config(layout="wide", page_title="Smart Load Shedding Optimizer — AP")
 st.title("Smart Load Shedding Optimizer — Andhra Pradesh (POC)")
@@ -73,7 +75,7 @@ def run_pipeline_and_load(deficit_val):
             df = df.merge(ref[avail], on='district_id', how='left')
     df['peak_demand_mw'] = pd.to_numeric(df.get('peak_demand_mw', 0), errors='coerce').fillna(0)
     df['outage_risk'] = pd.to_numeric(df.get('outage_risk', 0), errors='coerce').fillna(0.0)
-    scored = calculate_impact_scores(df, critical_infra=pd.read_parquet("data/processed/critical_infra.parquet") if Path("data/processed/critical_infra.parquet").exists() else pd.DataFrame())
+    scored = calculate_impact_scores( df, critical_infra=pd.read_parquet(CRITICAL_INFRA) if CRITICAL_INFRA.exists() else pd.DataFrame() )
     allocations, summary = allocate_load_shedding(scored, float(deficit_val))
     schedule_df, hourly_totals = generate_simple_schedule(allocations)
     # save outputs
@@ -85,16 +87,11 @@ def run_pipeline_and_load(deficit_val):
     return load_outputs()
 
 # If Run pressed -> recompute (and overwrite outputs)
+# Demo mode: always load precomputed outputs
+outputs = load_outputs()
+
 if run_button:
-    with st.spinner("Running prediction and optimization..."):
-        try:
-            outputs = run_pipeline_and_load(deficit)
-            st.success("Pipeline completed and outputs saved to outputs/")
-        except Exception as e:
-            st.error(f"Pipeline failed: {e}")
-            outputs = load_outputs()
-else:
-    outputs = load_outputs()
+    st.info("This deployed demo uses precomputed outputs. Run the full pipeline locally to refresh results, then push updated outputs to GitHub.")
 
 district_ref = load_district_ref()
 forecasts = outputs['forecast']
