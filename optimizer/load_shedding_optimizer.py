@@ -1,212 +1,128 @@
-# optimizer/load_shedding_optimizer.py
-"""
-Basic rule-based load-shedding optimizer (district-level), using `peak_demand_mw`.
-Saves allocations and a simple rotational schedule to outputs/.
-Usage:
-    python -c "from optimizer.load_shedding_optimizer import main_demo; main_demo(1500.0)"
-"""
+"""Load-shedding optimizer with fair, capacity-aware rotation."""
+
+from __future__ import annotations
+
 from pathlib import Path
-import pandas as pd
 import numpy as np
-import joblib
-
-MODEL_OUT = Path("models/saved/outage_model.joblib")
+import pandas as pd
 
 
-def calculate_impact_scores(df: pd.DataFrame, critical_infra: pd.DataFrame = None) -> pd.DataFrame:
-    df = df.copy()
-    df["pop_density"] = pd.to_numeric(df.get("pop_density", 0), errors="coerce").fillna(0)
-    df["impact_base"] = df["pop_density"].replace({0: 1.0}).astype(float)
-
-    # incorporate outage risk if present
-    if "outage_risk" in df.columns:
-        df["impact_score"] = df["impact_base"] * (1 + df["outage_risk"])
-    else:
-        df["impact_score"] = df["impact_base"]
-
-    # penalize districts with critical infrastructure (guard against missing column)
-    if critical_infra is not None and not critical_infra.empty and "district_id" in critical_infra.columns:
-        crit_counts = critical_infra.groupby("district_id").size().rename("crit_count").reset_index()
-        df = df.merge(crit_counts, on="district_id", how="left")
-        df["crit_count"] = df["crit_count"].fillna(0)
-        df["impact_score"] = df["impact_score"] * (1 + 0.25 * df["crit_count"])
-    else:
-        # ensure column exists for downstream code
-        df["crit_count"] = 0
-
-    return df
+_DEFICIT_TOL = 1e-6
 
 
-def allocate_load_shedding(df: pd.DataFrame, target_reduction_mw: float,
-                           max_pct_per_district: float = 0.1,
-                           max_hours_per_district: int = 2):
-    """
-    Allocate load shedding (MW) across districts with a per-district cap,
-    and compute a schedule that respects a max number of outage hours per district.
-    Returns allocations DataFrame (with shed_mw) and summary dict.
-    """
-    df = df.copy().sort_values("impact_score")
-    allocations = []
-    total_shed = 0.0
+def _critical_counts_by_district(critical_infra: pd.DataFrame) -> pd.DataFrame:
+    if critical_infra is None or critical_infra.empty:
+        return pd.DataFrame(columns=["district_id", "crit_count", "critical_load_mw"])
+    df = critical_infra.copy()
+    ref = pd.read_csv("data/geographic/ap_districts_reference.csv")
+    name_map = {str(n).strip().lower(): did for n, did in zip(ref["district_name"], ref["district_id"])}
+    if "district_id" not in df.columns:
+        df["district_id"] = df.get("district", "").astype(str).str.strip().str.lower().map(name_map)
+    df = df.dropna(subset=["district_id"]).copy()
+    if "avg_load_mw" not in df.columns:
+        df["avg_load_mw"] = pd.to_numeric(df.get("avg_load_kw", 0), errors="coerce").fillna(0) / 1000.0
+    agg = df.groupby("district_id").agg(
+        crit_count=("district_id", "size"),
+        critical_load_mw=("avg_load_mw", "sum"),
+    ).reset_index()
+    return agg
 
-    for _, row in df.iterrows():
-        demand = float(row.get("peak_demand_mw", 0) or 0)
-        # maximum MW we allow from this district
-        max_shed_mw = demand * max_pct_per_district
-        need = target_reduction_mw - total_shed
-        if need <= 0:
-            shed = 0.0
-        else:
-            shed = min(max_shed_mw, need)
-        allocations.append({
-            "district_id": row["district_id"],
-            "district_name": row.get("district_name", row["district_id"]),
-            "peak_demand_mw": demand,
-            "shed_mw": shed,
-            "shed_pct": (shed / demand * 100) if demand > 0 else 0.0,
-            "impact_score": row["impact_score"]
-        })
-        total_shed += shed
-        if total_shed >= target_reduction_mw:
-            # still append remaining districts as zero (so later schedule includes them)
-            # continue building allocations for completeness
-            pass
 
-    alloc_df = pd.DataFrame(allocations)
+def calculate_impact_scores(df: pd.DataFrame, critical_infra: pd.DataFrame | None = None) -> pd.DataFrame:
+    scored = df.copy()
+    scored["pop_density"] = pd.to_numeric(scored.get("pop_density", 0), errors="coerce").fillna(0)
+    scored["outage_risk"] = pd.to_numeric(scored.get("outage_risk", 0), errors="coerce").fillna(0)
+    scored["peak_demand_mw"] = pd.to_numeric(scored.get("peak_demand_mw", 0), errors="coerce").fillna(0)
+    scored["district_name"] = scored.get("district_name", scored["district_id"])
+
+    crit = _critical_counts_by_district(critical_infra)
+    scored = scored.merge(crit, on="district_id", how="left")
+    scored["crit_count"] = scored["crit_count"].fillna(0)
+    scored["critical_load_mw"] = scored["critical_load_mw"].fillna(0)
+
+    pop_scaled = scored["pop_density"] / max(scored["pop_density"].max(), 1)
+    crit_scaled = scored["crit_count"] / max(scored["crit_count"].max(), 1)
+    risk_scaled = scored["outage_risk"].clip(0, 1)
+    demand_scaled = scored["peak_demand_mw"] / max(scored["peak_demand_mw"].max(), 1)
+
+    scored["impact_score"] = 1.0 + 1.8 * pop_scaled + 2.4 * crit_scaled + 1.6 * risk_scaled + 0.8 * demand_scaled
+    scored["shedding_priority"] = 1 / scored["impact_score"]
+    return scored
+
+
+def allocate_load_shedding(
+    df: pd.DataFrame,
+    target_reduction_mw: float,
+    max_pct_per_district: float = 0.30,
+    max_hours_per_district: int = 4,
+):
+    alloc = df.copy().sort_values(["impact_score", "outage_risk", "pop_density"], ascending=[True, True, True]).reset_index(drop=True)
+    alloc["base_cap_mw"] = alloc["peak_demand_mw"] * max_pct_per_district
+    total_cap = alloc["base_cap_mw"].sum()
+    dynamic_pct = max_pct_per_district
+    if total_cap + _DEFICIT_TOL < target_reduction_mw:
+        dynamic_pct = min(0.95, target_reduction_mw / max(alloc["peak_demand_mw"].sum(), 1e-9) + 0.02)
+        alloc["base_cap_mw"] = alloc["peak_demand_mw"] * dynamic_pct
+
+    weights = alloc["shedding_priority"] / alloc["shedding_priority"].sum()
+    alloc["shed_mw"] = np.minimum(alloc["base_cap_mw"], weights * target_reduction_mw)
+    remaining = target_reduction_mw - alloc["shed_mw"].sum()
+
+    if remaining > _DEFICIT_TOL:
+        for idx in alloc.index:
+            room = alloc.at[idx, "base_cap_mw"] - alloc.at[idx, "shed_mw"]
+            if room <= 0:
+                continue
+            extra = min(room, remaining)
+            alloc.at[idx, "shed_mw"] += extra
+            remaining -= extra
+            if remaining <= _DEFICIT_TOL:
+                break
+
+    alloc["shed_pct"] = np.where(alloc["peak_demand_mw"] > 0, 100 * alloc["shed_mw"] / alloc["peak_demand_mw"], 0)
+    alloc["max_hours_per_district"] = max_hours_per_district
 
     summary = {
-        "total_reduction": float(alloc_df["shed_mw"].sum()),
-        "target": float(target_reduction_mw)
+        "total_reduction": float(alloc["shed_mw"].sum()),
+        "target": float(target_reduction_mw),
+        "dynamic_max_pct": float(dynamic_pct * 100),
+        "unmet_mw": float(max(target_reduction_mw - alloc["shed_mw"].sum(), 0)),
     }
-
-    # Also compute a suggested schedule based on shed_mw -> hours, respecting max_hours_per_district
-    schedule_df, hourly_totals = generate_simple_schedule(alloc_df, time_blocks=24, max_hours_per_district=max_hours_per_district)
-
-    # return allocations and summary, schedule can be created separately if needed
-    return alloc_df, summary
+    return alloc[["district_id", "district_name", "peak_demand_mw", "shed_mw", "shed_pct", "impact_score", "outage_risk", "crit_count"]], summary
 
 
-def generate_simple_schedule(alloc_df: pd.DataFrame, time_blocks: int = 24, max_hours_per_district: int = 2):
-    """
-    Generate a binary schedule for each district such that:
-      - number of outage hours for district approx = round((shed_mw / peak_demand_mw) * 24)
-      - number of hours is clamped to [0, max_hours_per_district]
-      - outages are assigned randomly across the day (seeded for reproducibility)
-    Returns schedule_df (one row per district) and hourly_totals (array length time_blocks).
-    """
+def generate_simple_schedule(alloc_df: pd.DataFrame, time_blocks: int = 24, max_hours_per_district: int = 4):
     if alloc_df is None or alloc_df.empty:
         return pd.DataFrame(), np.zeros(time_blocks)
 
-    np.random.seed(42)
-    n = len(alloc_df)
-    schedule = np.zeros((n, time_blocks), dtype=float)
-    hourly_reduction = []
-
-    # compute hours per district based on proportion of demand
-    for i, row in alloc_df.reset_index(drop=True).iterrows():
-        demand = float(row.get("peak_demand_mw", 0) or 0)
-        shed = float(row.get("shed_mw", 0) or 0)
-
-        if demand > 0 and shed > 0:
-            fraction_of_day = shed / demand  # fraction of full outage-equivalent over 24 hours
-            hours = int(round(fraction_of_day * time_blocks))
-            # clamp hours
-            hours = max(0, min(max_hours_per_district, hours))
-        else:
-            hours = 0
-
-        # if hours=0 but shed>0 and demand>0, ensure at least 1 hour if small shed exists and max_hours_per_district>0
-        if hours == 0 and shed > 0 and demand > 0 and max_hours_per_district > 0:
-            hours = 1
-
-        # choose hours randomly without replacement
-        if hours > 0:
-            chosen = np.random.choice(time_blocks, size=hours, replace=False)
-            schedule[i, chosen] = 1.0
-
-        # store per-district hourly reduction estimate (for information only)
-        per_hour_reduction = shed / max(hours, 1) if hours > 0 else 0.0
-        hourly_reduction.append(per_hour_reduction)
-
-    # compute hourly totals (MW) assuming per-district per-hour reduction estimated above
-    hourly_totals = np.zeros(time_blocks, dtype=float)
-    for i in range(n):
-        per_hour = hourly_reduction[i]
-        hourly_totals += schedule[i] * per_hour
-
-    # Format schedule_df: columns h00..h23 plus district_id, district_name, total_reduction_mw
-    idx = alloc_df.reset_index(drop=True)
+    alloc = alloc_df.reset_index(drop=True).copy()
     cols = [f"h{h:02d}" for h in range(time_blocks)]
+    schedule = np.zeros((len(alloc), time_blocks), dtype=int)
+    hourly_totals = np.zeros(time_blocks, dtype=float)
+
+    order = alloc.sort_values(["shed_pct", "shed_mw"], ascending=False).reset_index()
+    start_hour = 0
+    for _, row in order.iterrows():
+        i = int(row["index"])
+        demand = float(alloc.at[i, "peak_demand_mw"])
+        shed = float(alloc.at[i, "shed_mw"])
+        if demand <= 0 or shed <= 0:
+            continue
+        hours_needed = int(np.ceil((shed / demand) * time_blocks))
+        hours_needed = max(1, min(max_hours_per_district, hours_needed))
+        chosen = [(start_hour + j * max(1, time_blocks // max(hours_needed, 1))) % time_blocks for j in range(hours_needed)]
+        chosen = sorted(set(chosen))
+        while len(chosen) < hours_needed:
+            chosen.append((chosen[-1] + 1) % time_blocks if chosen else 0)
+            chosen = sorted(set(chosen))
+        per_hour = shed / len(chosen)
+        for h in chosen[:hours_needed]:
+            schedule[i, h] = 1
+            hourly_totals[h] += per_hour
+        start_hour = (start_hour + 3) % time_blocks
+
     schedule_df = pd.DataFrame(schedule, columns=cols)
-    schedule_df["district_id"] = idx["district_id"].values
-    schedule_df["district_name"] = idx.get("district_name", idx["district_id"]).values
-    schedule_df["total_reduction_mw"] = idx["shed_mw"].values
-
+    schedule_df.insert(0, "district_id", alloc["district_id"])
+    schedule_df.insert(1, "district_name", alloc["district_name"])
+    schedule_df["total_reduction_mw"] = alloc["shed_mw"]
     return schedule_df, hourly_totals
-
-
-def main_demo(target_reduction_mw: float = 1500.0):
-    md_path = Path("data/processed/modeling_dataset.parquet")
-    ref_path = Path("data/geographic/ap_districts_reference.csv")
-    crit_path = Path("data/processed/critical_infra.parquet")
-
-    if not md_path.exists():
-        raise FileNotFoundError(md_path)
-    md = pd.read_parquet(md_path)
-
-    # use last timestamp per district as "current"
-    md = md.sort_values("timestamp")
-    latest = md.groupby("district_id").tail(1)
-
-    # make an explicit copy before modifying to avoid SettingWithCopyWarning
-    latest = latest.copy()
-
-    # ensure peak_demand_mw exists
-    if "peak_demand_mw" not in latest.columns:
-        raise RuntimeError("modeling dataset lacks 'peak_demand_mw' column - run power distributor first")
-
-    district_ref = pd.read_csv(ref_path) if ref_path.exists() else pd.DataFrame()
-    critical = pd.read_parquet(crit_path) if crit_path.exists() else pd.DataFrame()
-
-    # prepare input frame using peak_demand_mw
-    input_df = latest[["district_id", "peak_demand_mw"]].copy()
-    if "district_name" in latest.columns:
-        input_df = input_df.merge(latest[["district_id", "district_name"]].drop_duplicates(), on="district_id", how="left")
-    if not district_ref.empty:
-        input_df = input_df.merge(district_ref[["district_id", "pop_density", "district_name"]].drop_duplicates(), on="district_id", how="left")
-
-    # outage risk: use model if available
-    if MODEL_OUT.exists():
-        mi = joblib.load(MODEL_OUT)
-        feat_cols = mi["feature_cols"]
-        # ensure features present in latest; set missing ones to 0 using .loc
-        for c in feat_cols:
-            if c not in latest.columns:
-                latest.loc[:, c] = 0
-        X = latest[feat_cols].fillna(0)
-        risks = mi["model"].predict_proba(X)[:, 1]
-        risk_df = pd.DataFrame({"district_id": latest["district_id"].values, "outage_risk": risks})
-        input_df = input_df.merge(risk_df, on="district_id", how="left")
-    else:
-        # fallback: normalized outages_7d if present else zeros
-        input_df["outage_risk"] = latest.get("outages_7d", 0).fillna(0).astype(float)
-        if input_df["outage_risk"].max() > 0:
-            input_df["outage_risk"] = input_df["outage_risk"] / (input_df["outage_risk"].max() + 1e-9)
-
-    scored = calculate_impact_scores(input_df, critical)
-    alloc_df, summary = allocate_load_shedding(scored, float(target_reduction_mw))
-    schedule_df, hourly_totals = generate_simple_schedule(alloc_df)
-
-    out_dir = Path("outputs")
-    out_dir.mkdir(exist_ok=True)
-    alloc_df.to_csv(out_dir / "load_shedding_allocations.csv", index=False)
-    schedule_df.to_csv(out_dir / "load_shedding_schedule.csv", index=False)
-
-    print("Allocations (top):")
-    print(alloc_df.sort_values("shed_mw", ascending=False).to_string(index=False))
-    print("\nSummary:", summary)
-    return alloc_df, schedule_df, summary
-
-
-if __name__ == "__main__":
-    main_demo(1500.0)

@@ -1,12 +1,5 @@
-# scripts/run_pipeline.py
-"""
-End-to-end pipeline runner for Smart Load Shedding Optimizer.
+"""End-to-end pipeline runner for Smart Load Shedding Optimizer."""
 
-Usage (from project root):
-  python scripts/run_pipeline.py --deficit 1500 --use-models
-
-This script ensures the project root is on sys.path so `from services...` imports work.
-"""
 import os
 import sys
 import argparse
@@ -14,11 +7,9 @@ from pathlib import Path
 import logging
 import pandas as pd
 
-# Ensure project root is on sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Project imports
-from services.predictor import predict_snapshot_all, get_latest_snapshot
+from services.predictor import predict_snapshot_all
 from optimizer.load_shedding_optimizer import calculate_impact_scores, allocate_load_shedding, generate_simple_schedule
 
 LOG = logging.getLogger("run_pipeline")
@@ -34,80 +25,31 @@ def save_outputs(out_dir: Path, forecasts: pd.DataFrame, risks: pd.DataFrame, al
     LOG.info("Saved outputs to %s", out_dir)
 
 
-def prepare_input_for_optimizer(forecasts: pd.DataFrame, risks: pd.DataFrame, district_ref_path: Path, use_predicted: bool = True) -> pd.DataFrame:
-    """
-    Merge forecasts and risks and join district reference safely.
-    Only selects columns from the district ref that actually exist.
-    """
-    df = forecasts.merge(risks[['district_id', 'outage_risk']], on='district_id', how='left')
-
-    # unify demand column names
-    if use_predicted and 'predicted_peak_demand_mw' in df.columns:
-        df = df.rename(columns={'predicted_peak_demand_mw': 'peak_demand_mw'})
-
-    # fallback candidates
-    for cand in ['peak_demand_mw', 'predicted_peak_demand_mw', 'demand_mw']:
-        if cand in df.columns:
-            df = df.rename(columns={cand: 'peak_demand_mw'})
-            break
-
-    # Attach district reference safely: only available columns
+def prepare_input_for_optimizer(forecasts: pd.DataFrame, risks: pd.DataFrame, district_ref_path: Path) -> pd.DataFrame:
+    df = forecasts.merge(risks[["district_id", "outage_risk"]], on="district_id", how="left")
+    if "predicted_peak_demand_mw" in df.columns:
+        df["peak_demand_mw"] = pd.to_numeric(df["predicted_peak_demand_mw"], errors="coerce")
     if district_ref_path.exists():
         ref = pd.read_csv(district_ref_path)
-        possible = ['district_id', 'pop_density', 'district_name', 'latitude', 'longitude']
-        avail = [c for c in possible if c in ref.columns]
-        if 'district_id' not in avail:
-            LOG.warning("District reference does not contain 'district_id' column; skipping merge")
-        else:
-            df = df.merge(ref[avail], on='district_id', how='left')
-    else:
-        LOG.warning("District reference not found at %s", district_ref_path)
-
-    # Ensure numeric columns exist
-    df['peak_demand_mw'] = pd.to_numeric(df.get('peak_demand_mw', 0), errors='coerce').fillna(0.0)
-    df['outage_risk'] = pd.to_numeric(df.get('outage_risk', 0), errors='coerce').fillna(0.0)
+        keep = [c for c in ["district_id", "district_name", "pop_density"] if c in ref.columns]
+        df = df.merge(ref[keep], on="district_id", how="left")
+    df["peak_demand_mw"] = pd.to_numeric(df.get("peak_demand_mw", 0), errors="coerce").fillna(0)
+    df["outage_risk"] = pd.to_numeric(df.get("outage_risk", 0), errors="coerce").fillna(0)
     return df
 
 
 def run(deficit_mw: float, out_dir: str = "outputs", use_models: bool = True):
-    out_path = Path(out_dir)
     LOG.info("Starting pipeline: use_models=%s, deficit=%.1f MW", use_models, deficit_mw)
-
-    # 1) Forecasts & risks
-    try:
-        if use_models:
-            forecasts, risks = predict_snapshot_all()
-        else:
-            snap = get_latest_snapshot()
-            if 'peak_demand_mw' in snap.columns:
-                forecasts = snap[['district_id', 'timestamp', 'peak_demand_mw']].rename(columns={'peak_demand_mw': 'predicted_peak_demand_mw'})
-            else:
-                forecasts = pd.DataFrame([{'district_id': r, 'timestamp': pd.NaT, 'predicted_peak_demand_mw': 0.0} for r in snap['district_id'].unique()])
-            risks = pd.DataFrame({'district_id': forecasts['district_id'].values, 'timestamp': forecasts['timestamp'].values, 'outage_risk': 0.0})
-    except Exception as e:
-        LOG.exception("Prediction step failed: %s", e)
-        raise
-
+    forecasts, risks = predict_snapshot_all()
     LOG.info("Forecasts rows: %d; Risks rows: %d", len(forecasts), len(risks))
-
-    # 2) Prepare input for optimizer
-    district_ref_path = Path("data/geographic/ap_districts_reference.csv")
-    input_df = prepare_input_for_optimizer(forecasts, risks, district_ref_path, use_predicted=True)
-
-    # 3) Load critical infra if available
+    input_df = prepare_input_for_optimizer(forecasts, risks, Path("data/geographic/ap_districts_reference.csv"))
     crit_path = Path("data/processed/critical_infra.parquet")
     critical = pd.read_parquet(crit_path) if crit_path.exists() else pd.DataFrame()
-
-    # 4) Calculate impact scores and allocate
     scored = calculate_impact_scores(input_df, critical)
-    allocations, summary = allocate_load_shedding(scored, float(deficit_mw), max_pct_per_district=0.05, max_hours_per_district=1)
-    schedule_df, hourly_totals = generate_simple_schedule(allocations)
-
-    LOG.info("Allocation complete. total_reduction=%.2f target=%.2f", summary['total_reduction'], summary['target'])
-
-    # 5) Save outputs
-    save_outputs(out_path, forecasts, risks, allocations, schedule_df)
-    LOG.info("Pipeline finished. Summary: %s", summary)
+    allocations, summary = allocate_load_shedding(scored, float(deficit_mw), max_pct_per_district=0.30, max_hours_per_district=4)
+    schedule_df, hourly_totals = generate_simple_schedule(allocations, max_hours_per_district=4)
+    LOG.info("Allocation complete. total_reduction=%.2f target=%.2f", summary["total_reduction"], summary["target"])
+    save_outputs(Path(out_dir), forecasts, risks, allocations, schedule_df)
     return forecasts, risks, allocations, schedule_df
 
 
@@ -115,20 +57,10 @@ def parse_args():
     p = argparse.ArgumentParser(description="Run SLS Optimizer pipeline: predict + optimize")
     p.add_argument("--deficit", type=float, default=1500.0, help="Target reduction (MW)")
     p.add_argument("--out-dir", type=str, default="outputs", help="Output directory")
-    p.add_argument("--use-models", action="store_true", help="Use saved models for forecasts/risks")
+    p.add_argument("--use-models", action="store_true", help="Retained for compatibility")
     return p.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    # auto-detect models if not specified
-    use_models_flag = args.use_models
-    if not use_models_flag:
-        models_dir = Path("models/saved")
-        if models_dir.exists() and any(models_dir.glob("demand_model_*.joblib")):
-            use_models_flag = True
-    try:
-        run(deficit_mw=args.deficit, out_dir=args.out_dir, use_models=use_models_flag)
-    except Exception as e:
-        LOG.exception("Pipeline failed: %s", e)
-        raise
+    run(deficit_mw=args.deficit, out_dir=args.out_dir, use_models=True)
