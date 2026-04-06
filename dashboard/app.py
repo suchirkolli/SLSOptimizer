@@ -52,13 +52,49 @@ def load_district_ref():
 
 @st.cache_data
 def load_outputs():
-    out = {}
-    out['forecast'] = pd.read_csv(OUT_DIR / "forecast.csv", parse_dates=["timestamp"]) if (OUT_DIR / "forecast.csv").exists() else pd.DataFrame()
-    out['forecast_24h'] = pd.read_csv(OUT_DIR / "forecast_24h.csv", parse_dates=["timestamp"]) if (OUT_DIR / "forecast_24h.csv").exists() else pd.DataFrame()
-    out['risk'] = pd.read_csv(OUT_DIR / "outage_risk.csv", parse_dates=["timestamp"]) if (OUT_DIR / "outage_risk.csv").exists() else pd.DataFrame()
-    out['alloc'] = pd.read_csv(OUT_DIR / "load_shedding_allocations.csv") if (OUT_DIR / "load_shedding_allocations.csv").exists() else pd.DataFrame()
-    out['schedule'] = pd.read_csv(OUT_DIR / "load_shedding_schedule.csv") if (OUT_DIR / "load_shedding_schedule.csv").exists() else pd.DataFrame()
-    return out
+    outputs = {}
+
+    try:
+        forecast_24h = pd.read_csv(OUT_DIR / "forecast_24h.csv")
+        outputs["forecast_24h"] = forecast_24h
+        print("Loaded forecast_24h:", forecast_24h.shape)
+    except Exception as e:
+        print("Failed forecast_24h:", e)
+        outputs["forecast_24h"] = pd.DataFrame()
+
+    try:
+        forecast = pd.read_csv(OUT_DIR / "forecast.csv")
+        outputs["forecast"] = forecast
+        print("Loaded forecast:", forecast.shape)
+    except Exception as e:
+        print("Failed forecast:", e)
+        outputs["forecast"] = pd.DataFrame()
+
+    try:
+        risk = pd.read_csv(OUT_DIR / "outage_risk.csv")
+        outputs["outage_risk"] = risk
+        print("Loaded outage_risk:", risk.shape)
+    except Exception as e:
+        print("Failed outage_risk:", e)
+        outputs["outage_risk"] = pd.DataFrame()
+
+    try:
+        alloc = pd.read_csv(OUT_DIR / "load_shedding_allocations.csv")
+        outputs["allocations"] = alloc
+        print("Loaded allocations:", alloc.shape)
+    except Exception as e:
+        print("Failed allocations:", e)
+        outputs["allocations"] = pd.DataFrame()
+
+    try:
+        sched = pd.read_csv(OUT_DIR / "load_shedding_schedule.csv")
+        outputs["schedule"] = sched
+        print("Loaded schedule:", sched.shape)
+    except Exception as e:
+        print("Failed schedule:", e)
+        outputs["schedule"] = pd.DataFrame()
+
+    return outputs
 
 def run_pipeline_and_load(deficit_val):
     forecasts, risks = predict_snapshot_all()
