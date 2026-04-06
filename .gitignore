@@ -30,11 +30,17 @@ config/config.yaml
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Data files 
-# (may want to gitignore large data files but keep structure)
-*.csv
-*.parquet
+# Data files
+# Ignore most generated data by default
 *.pkl
+
+# Keep deploy-critical demo data and outputs
+!data/geographic/ap_districts_reference.csv
+!data/processed/modeling_dataset.parquet
+!data/processed/outages.parquet
+!data/processed/critical_infra.parquet
+!outputs/*.csv
+!models/saved/*.joblib
 
 # IDE files
 .idea/
