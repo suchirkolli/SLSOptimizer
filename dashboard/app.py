@@ -130,11 +130,11 @@ if run_button:
     st.info("This deployed demo uses precomputed outputs. Run the full pipeline locally to refresh results, then push updated outputs to GitHub.")
 
 district_ref = load_district_ref()
-forecasts = outputs['forecast']
-forecasts_24h = outputs['forecast_24h']
-risks = outputs['risk']
-allocations = outputs['alloc']
-schedule_df = outputs['schedule']
+forecasts = outputs.get("forecast", pd.DataFrame())
+forecasts_24h = outputs.get("forecast_24h", pd.DataFrame())
+risks = outputs.get("outage_risk", pd.DataFrame())
+allocations = outputs.get("allocations", pd.DataFrame())
+schedule_df = outputs.get("schedule", pd.DataFrame())
 
 tab1, tab2, tab3 = st.tabs(["Demand Forecast", "Outage Risk Map", "Allocations & Schedule"])
 
